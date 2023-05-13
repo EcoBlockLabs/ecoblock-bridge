@@ -1,8 +1,8 @@
-import { L1Network, L2Network, addCustomNetwork } from '@arbitrum/sdk'
+import { addCustomNetwork, L1Network, L2Network } from '@ecoblocklabs/ecojs'
 import {
   l1Networks,
   l2Networks
-} from '@arbitrum/sdk/dist/lib/dataEntities/networks'
+} from '@ecoblocklabs/ecojs/dist/lib/dataEntities/networks'
 
 import * as Sentry from '@sentry/react'
 import { SwitchNetworkArgs } from '@wagmi/core'
@@ -31,9 +31,11 @@ export enum ChainId {
   Local = 1337,
   Sepolia = 11155111,
   // L2
+  EcoBlock = 620,
   ArbitrumOne = 42161,
   ArbitrumNova = 42170,
   // L2 Testnets
+  EcoBlockSepolia = 621,
   /**
    * Arbitrum Rinkeby is deprecated, but we are keeping it in order to detect it and point to Arbitrum Goerli instead.
    */
@@ -53,10 +55,16 @@ export const rpcURLs: { [chainId: number]: string } = {
     env: process.env.NEXT_PUBLIC_GOERLI_RPC_URL,
     fallback: GOERLI_INFURA_RPC_URL
   }),
+  [ChainId.Sepolia]: loadEnvironmentVariableWithFallback({
+    env: process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL,
+    fallback: GOERLI_INFURA_RPC_URL
+  }),
   // L2
+  [ChainId.EcoBlock]: 'https://rpc.ecoblock.tech',
   [ChainId.ArbitrumOne]: 'https://arb1.arbitrum.io/rpc',
   [ChainId.ArbitrumNova]: 'https://nova.arbitrum.io/rpc',
   // L2 Testnets
+  [ChainId.EcoBlockSepolia]: 'https://rpc-testnet.ecoblock.tech',
   [ChainId.ArbitrumGoerli]: 'https://goerli-rollup.arbitrum.io/rpc'
 }
 
@@ -65,10 +73,13 @@ export const explorerUrls: { [chainId: number]: string } = {
   [ChainId.Mainnet]: 'https://etherscan.io',
   // L1 Testnets
   [ChainId.Goerli]: 'https://goerli.etherscan.io',
+  [ChainId.Sepolia]: 'https://sepolia.etherscan.io/',
   // L2
+  [ChainId.EcoBlock]: 'https://ecoscan.io',
   [ChainId.ArbitrumNova]: 'https://nova.arbiscan.io',
   [ChainId.ArbitrumOne]: 'https://arbiscan.io',
   // L2 Testnets
+  [ChainId.EcoBlockSepolia]: 'https://testnet.ecoscan.io',
   [ChainId.ArbitrumGoerli]: 'https://goerli.arbiscan.io'
 }
 
@@ -111,20 +122,25 @@ export const l2LptGatewayAddresses: { [chainId: number]: string } = {
 // Default L2 Chain to use for a certain chainId
 export const chainIdToDefaultL2ChainId: { [chainId: number]: ChainId[] } = {
   // L1
-  [ChainId.Mainnet]: [ChainId.ArbitrumOne, ChainId.ArbitrumNova],
+  [ChainId.Mainnet]: [ChainId.EcoBlock],
   // L1 Testnets
-  [ChainId.Goerli]: [ChainId.ArbitrumGoerli],
+  [ChainId.Sepolia]: [ChainId.EcoBlockSepolia],
+
   // L2
-  [ChainId.ArbitrumOne]: [ChainId.ArbitrumOne],
-  [ChainId.ArbitrumNova]: [ChainId.ArbitrumNova],
+  [ChainId.EcoBlock]: [ChainId.EcoBlock],
+
   // L2 Testnets
-  [ChainId.ArbitrumGoerli]: [ChainId.ArbitrumGoerli]
+  [ChainId.EcoBlockSepolia]: [ChainId.EcoBlockSepolia]
 }
 
 const defaultL1Network: L1Network = {
   blockTime: 10,
   chainID: 1337,
   explorerUrl: '',
+  rpcUrl: loadEnvironmentVariableWithFallback({
+    env: process.env.NEXT_PUBLIC_LOCAL_ETHEREUM_RPC_URL,
+    fallback: 'http://localhost:8545'
+  }),
   isCustom: true,
   name: 'EthLocal',
   partnerChainIDs: [412346],
@@ -142,9 +158,13 @@ const defaultL2Network: L2Network = {
     sequencerInbox: '0xe7362d0787b51d8c72d504803e5b1d6dcda89540'
   },
   explorerUrl: '',
+  rpcUrl: loadEnvironmentVariableWithFallback({
+    env: process.env.NEXT_PUBLIC_LOCAL_ARBITRUM_RPC_URL,
+    fallback: 'http://localhost:8547'
+  }),
   isArbitrum: true,
   isCustom: true,
-  name: 'ArbLocal',
+  name: 'EcoBlockLocal',
   partnerChainID: 1337,
   retryableLifetimeSeconds: 604800,
   nitroGenesisBlock: 0,
@@ -178,23 +198,14 @@ const registerLocalNetworkDefaultParams: RegisterLocalNetworkParams = {
   l2Network: defaultL2Network
 }
 
-export const localL1NetworkRpcUrl = loadEnvironmentVariableWithFallback({
-  env: process.env.NEXT_PUBLIC_LOCAL_ETHEREUM_RPC_URL,
-  fallback: 'http://localhost:8545'
-})
-export const localL2NetworkRpcUrl = loadEnvironmentVariableWithFallback({
-  env: process.env.NEXT_PUBLIC_LOCAL_ARBITRUM_RPC_URL,
-  fallback: 'http://localhost:8547'
-})
-
 export function registerLocalNetwork(
   params: RegisterLocalNetworkParams = registerLocalNetworkDefaultParams
 ) {
   const { l1Network, l2Network } = params
 
   try {
-    rpcURLs[l1Network.chainID] = localL1NetworkRpcUrl
-    rpcURLs[l2Network.chainID] = localL2NetworkRpcUrl
+    rpcURLs[l1Network.chainID] = l1Network.rpcUrl
+    rpcURLs[l2Network.chainID] = l2Network.rpcUrl
 
     chainIdToDefaultL2ChainId[l1Network.chainID] = [l2Network.chainID]
     chainIdToDefaultL2ChainId[l2Network.chainID] = [l2Network.chainID]
@@ -205,40 +216,67 @@ export function registerLocalNetwork(
   }
 }
 
-export function isNetwork(chainId: ChainId) {
+interface IsNetwork {
+  // L1
+  isMainnet: boolean
+  isEthereum: boolean
+  // L1 Testnets
+  isRinkeby: boolean
+  isGoerli: boolean
+  isSepolia: boolean
+  // L2
+  isArbitrum: boolean
+  isEcoBlock: boolean
+  isArbitrumOne: boolean
+  isArbitrumNova: boolean
+  // L2 Testnets
+  isEcoBlockSepolia: boolean
+  isArbitrumRinkeby: boolean
+  isArbitrumGoerli: boolean
+  // Testnet
+  isTestnet: boolean
+  // General
+  isSupported: boolean
+}
+
+export function isNetwork(chainId: ChainId): IsNetwork {
   const isMainnet = chainId === ChainId.Mainnet
 
   const isRinkeby = chainId === ChainId.Rinkeby
   const isGoerli = chainId === ChainId.Goerli
   const isSepolia = chainId === ChainId.Sepolia
 
+  const isEcoBlock = chainId === ChainId.EcoBlock
+  const isEcoBlockSepolia = chainId === ChainId.EcoBlockSepolia
+
   const isArbitrumOne = chainId === ChainId.ArbitrumOne
   const isArbitrumNova = chainId === ChainId.ArbitrumNova
   const isArbitrumGoerli = chainId === ChainId.ArbitrumGoerli
   const isArbitrumRinkeby = chainId === ChainId.ArbitrumRinkeby
 
-  const isArbitrum =
-    isArbitrumOne || isArbitrumNova || isArbitrumGoerli || isArbitrumRinkeby
+  const isArbitrum = isEcoBlock || isEcoBlockSepolia
 
-  const isTestnet =
-    isRinkeby || isGoerli || isArbitrumGoerli || isArbitrumRinkeby || isSepolia
+  const isEthereum = isMainnet || isSepolia
 
-  const isSupported =
-    isArbitrumOne || isArbitrumNova || isMainnet || isGoerli || isArbitrumGoerli // is network supported on bridge
+  const isTestnet = isSepolia || isEcoBlockSepolia
+
+  const isSupported = isMainnet || isSepolia || isEcoBlock || isEcoBlockSepolia // is network supported on bridge
 
   return {
     // L1
     isMainnet,
-    isEthereum: !isArbitrum,
+    isEthereum: isEthereum,
     // L1 Testnets
     isRinkeby,
     isGoerli,
     isSepolia,
     // L2
     isArbitrum,
+    isEcoBlock,
     isArbitrumOne,
     isArbitrumNova,
     // L2 Testnets
+    isEcoBlockSepolia,
     isArbitrumRinkeby,
     isArbitrumGoerli,
     // Testnet
@@ -253,20 +291,17 @@ export function getNetworkName(chainId: number) {
     case ChainId.Mainnet:
       return 'Mainnet'
 
-    case ChainId.Goerli:
-      return 'Goerli'
+    case ChainId.Sepolia:
+      return 'Sepolia'
 
     case ChainId.Local:
       return 'Ethereum'
 
-    case ChainId.ArbitrumOne:
-      return 'Arbitrum One'
+    case ChainId.EcoBlock:
+      return 'EcoBlock'
 
-    case ChainId.ArbitrumNova:
-      return 'Arbitrum Nova'
-
-    case ChainId.ArbitrumGoerli:
-      return 'Arbitrum Goerli'
+    case ChainId.EcoBlockSepolia:
+      return 'EcoBlock Testnet'
 
     case ChainId.ArbitrumLocal:
       return 'Arbitrum'
@@ -298,8 +333,8 @@ export function getNetworkLogo(chainId: number) {
 
 export function getSupportedNetworks(chainId = 0) {
   return isNetwork(chainId).isTestnet
-    ? [ChainId.Goerli, ChainId.ArbitrumGoerli]
-    : [ChainId.Mainnet, ChainId.ArbitrumOne, ChainId.ArbitrumNova]
+    ? [ChainId.Sepolia, ChainId.EcoBlockSepolia]
+    : [ChainId.Mainnet, ChainId.EcoBlock]
 }
 
 const handleSwitchNetworkNotSupported = (

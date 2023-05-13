@@ -12,9 +12,7 @@ const emptyData = { tps: null }
 const fetchNetworkTPS = async (l2ChainId: number) => {
   // currently we only support TPS information for Arb-one and nova
   // return null for rest of the networks
-  const canFetchTPS =
-    isNetwork(Number(l2ChainId)).isArbitrumNova ||
-    isNetwork(Number(l2ChainId)).isArbitrumOne
+  const canFetchTPS = isNetwork(Number(l2ChainId)).isEcoBlock
   if (!canFetchTPS) return emptyData
 
   // url from where we'll fetch stats

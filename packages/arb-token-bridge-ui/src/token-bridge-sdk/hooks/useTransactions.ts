@@ -2,13 +2,13 @@ import { useReducer, useEffect, useMemo } from 'react'
 import { TransactionReceipt } from '@ethersproject/abstract-provider'
 import { AssetType, TransactionActions } from './arbTokenBridge.types'
 import { BigNumber, ethers } from 'ethers'
-import { L1ToL2MessageStatus } from '@arbitrum/sdk'
+import { L1ToL2MessageStatus } from '@ecoblocklabs/ecojs'
 import {
   EthDepositMessage,
   EthDepositStatus,
   L1ToL2MessageReader,
   L1ToL2MessageReaderClassic
-} from '@arbitrum/sdk/dist/lib/message/L1ToL2Message'
+} from '@ecoblocklabs/ecojs/dist/lib/message/L1ToL2Message'
 
 type Action =
   | { type: 'ADD_TRANSACTION'; transaction: Transaction }

@@ -12,10 +12,10 @@ import {
   Erc20Bridger,
   L1ToL2MessageStatus,
   L2ToL1Message
-} from '@arbitrum/sdk'
-import { L1EthDepositTransaction } from '@arbitrum/sdk/dist/lib/message/L1Transaction'
-import { Inbox__factory } from '@arbitrum/sdk/dist/lib/abi/factories/Inbox__factory'
-import { ERC20__factory } from '@arbitrum/sdk/dist/lib/abi/factories/ERC20__factory'
+} from '@ecoblocklabs/ecojs'
+import { L1EthDepositTransaction } from '@ecoblocklabs/ecojs/dist/lib/message/L1Transaction'
+import { Inbox__factory } from '@ecoblocklabs/ecojs/dist/lib/abi/factories/Inbox__factory'
+import { ERC20__factory } from '@ecoblocklabs/ecojs/dist/lib/abi/factories/ERC20__factory'
 
 import { getL1ERC20Address } from '../util/getL1ERC20Address'
 import useTransactions, { L1ToL2MessageData } from './useTransactions'

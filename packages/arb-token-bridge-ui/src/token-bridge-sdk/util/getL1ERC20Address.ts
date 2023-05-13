@@ -1,5 +1,5 @@
 import { Provider } from '@ethersproject/providers'
-import { Erc20Bridger } from '@arbitrum/sdk'
+import { Erc20Bridger } from '@ecoblocklabs/ecojs'
 
 /**
  * Retrieves the L1 address of an ERC-20 token using its L2 address.

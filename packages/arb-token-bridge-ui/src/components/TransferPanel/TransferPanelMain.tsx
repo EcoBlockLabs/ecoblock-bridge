@@ -8,8 +8,8 @@ import {
 import { Loader } from '../common/atoms/Loader'
 import { twMerge } from 'tailwind-merge'
 import { BigNumber, constants, utils } from 'ethers'
-import { L1Network, L2Network } from '@arbitrum/sdk'
-import { l2Networks } from '@arbitrum/sdk/dist/lib/dataEntities/networks'
+import { L1Network, L2Network } from '@ecoblocklabs/ecojs'
+import { l2Networks } from '@ecoblocklabs/ecojs/dist/lib/dataEntities/networks'
 import { ERC20BridgeToken, useBalance, useGasPrice } from 'token-bridge-sdk'
 import * as Sentry from '@sentry/react'
 import Image from 'next/image'
@@ -83,17 +83,13 @@ function NetworkListbox({
   onChange
 }: NetworkListboxProps) {
   const buttonClassName = useMemo(() => {
-    const { isArbitrum, isArbitrumNova } = isNetwork(value.chainID)
+    const { isArbitrum } = isNetwork(value.chainID)
 
     if (!isArbitrum) {
       return 'bg-eth-primary'
     }
 
-    if (isArbitrumNova) {
-      return 'bg-arb-nova-primary'
-    }
-
-    return 'bg-arb-one-primary'
+    return 'bg-arb-nova-primary'
   }, [value])
 
   const getOptionClassName = useCallback(
@@ -187,7 +183,7 @@ function NetworkContainer({
   children: React.ReactNode
 }) {
   const { backgroundImage, backgroundClassName } = useMemo(() => {
-    const { isArbitrum, isArbitrumNova } = isNetwork(network.chainID)
+    const { isArbitrum } = isNetwork(network.chainID)
 
     if (!isArbitrum) {
       return {
@@ -196,16 +192,9 @@ function NetworkContainer({
       }
     }
 
-    if (isArbitrumNova) {
-      return {
-        backgroundImage: `url('/images/ArbitrumNovaLogo.svg')`,
-        backgroundClassName: 'bg-arb-nova-dark'
-      }
-    }
-
     return {
-      backgroundImage: `url('/images/ArbitrumOneLogo.svg')`,
-      backgroundClassName: 'bg-arb-one-dark'
+      backgroundImage: `url('/images/ArbitrumNovaLogo.svg')`,
+      backgroundClassName: 'bg-arb-nova-dark'
     }
   }, [network])
 

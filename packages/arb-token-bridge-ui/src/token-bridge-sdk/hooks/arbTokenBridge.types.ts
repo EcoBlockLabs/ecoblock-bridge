@@ -5,28 +5,28 @@ import { TokenList } from '@uniswap/token-lists'
 import {
   L1ToL2MessageStatus,
   L2ToL1MessageStatus as OutgoingMessageState
-} from '@arbitrum/sdk'
+} from '@ecoblocklabs/ecojs'
 import {
   EthDepositMessage,
   L1ToL2MessageReader,
   L1ToL2MessageReaderClassic
-} from '@arbitrum/sdk/dist/lib/message/L1ToL2Message'
-import { ERC20 } from '@arbitrum/sdk/dist/lib/abi/ERC20'
-import { StandardArbERC20 } from '@arbitrum/sdk/dist/lib/abi/StandardArbERC20'
-import { WithdrawalInitiatedEvent } from '@arbitrum/sdk/dist/lib/abi/L2ArbitrumGateway'
-import { L2ToL1TransactionEvent } from '@arbitrum/sdk/dist/lib/message/L2ToL1Message'
-import { EventArgs } from '@arbitrum/sdk/dist/lib/dataEntities/event'
+} from '@ecoblocklabs/ecojs/dist/lib/message/L1ToL2Message'
+import { ERC20 } from '@ecoblocklabs/ecojs/dist/lib/abi/ERC20'
+import { StandardArbERC20 } from '@ecoblocklabs/ecojs/dist/lib/abi/StandardArbERC20'
+import { WithdrawalInitiatedEvent } from '@ecoblocklabs/ecojs/dist/lib/abi/L2ArbitrumGateway'
+import { L2ToL1TransactionEvent } from '@ecoblocklabs/ecojs/dist/lib/message/L2ToL1Message'
+import { EventArgs } from '@ecoblocklabs/ecojs/dist/lib/dataEntities/event'
 
 import {
   L1EthDepositTransaction,
   L1EthDepositTransactionReceipt,
   L1ContractCallTransaction,
   L1ContractCallTransactionReceipt
-} from '@arbitrum/sdk/dist/lib/message/L1Transaction'
+} from '@ecoblocklabs/ecojs/dist/lib/message/L1Transaction'
 import {
   L2ContractTransaction,
   L2TransactionReceipt
-} from '@arbitrum/sdk/dist/lib/message/L2Transaction'
+} from '@ecoblocklabs/ecojs/dist/lib/message/L2Transaction'
 
 import {
   FailedTransaction,

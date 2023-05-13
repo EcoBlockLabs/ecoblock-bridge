@@ -1,11 +1,12 @@
-import { createClient, configureChains, goerli } from 'wagmi'
-import { mainnet, arbitrum, arbitrumGoerli } from '@wagmi/core/chains'
+import { configureChains, createClient } from 'wagmi'
+import { mainnet, sepolia } from '@wagmi/core/chains'
 import { publicProvider } from 'wagmi/providers/public'
 import { connectorsForWallets, getDefaultWallets } from '@rainbow-me/rainbowkit'
-import { trustWallet, ledgerWallet } from '@rainbow-me/rainbowkit/wallets'
+import { ledgerWallet, trustWallet } from '@rainbow-me/rainbowkit/wallets'
 
 import {
-  arbitrumNova,
+  ecoblock,
+  ecoblockSepolia,
   localL1Network as local,
   localL2Network as arbitrumLocal
 } from './wagmiAdditionalNetworks'
@@ -15,16 +16,17 @@ const chainList = isTestingEnvironment
   ? [
       // mainnet, arb1, & arb nova are for network switch tests
       mainnet,
-      arbitrum,
-      arbitrumNova,
+      ecoblock,
+
       // goerli & arb goerli are for tx history panel tests
-      goerli,
-      arbitrumGoerli,
+      sepolia,
+      ecoblockSepolia,
+
       // add local environments during testing
       local,
       arbitrumLocal
     ]
-  : [mainnet, arbitrum, arbitrumNova, goerli, arbitrumGoerli]
+  : [mainnet, ecoblock, sepolia, ecoblockSepolia]
 
 const { chains, provider } = configureChains(chainList, [publicProvider()])
 

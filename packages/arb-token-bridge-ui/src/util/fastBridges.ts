@@ -16,10 +16,12 @@ export enum FastBridgeNames {
   Synapse = 'Synapse'
 }
 
+// TODO we not support this token, remove in the future
 export enum NonCanonicalTokenNames {
   FRAX = 'FRAX'
 }
 
+// TODO we not support this token, remove in the future
 export enum NonCanonicalTokenAddresses {
   FRAX = '0x853d955acef822db058eb8505911ed77f175b99e'
 }

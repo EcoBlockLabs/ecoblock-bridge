@@ -1,10 +1,10 @@
 import { useCallback, useEffect } from 'react'
-import { L1ToL2MessageStatus } from '@arbitrum/sdk'
+import { L1ToL2MessageStatus } from '@ecoblocklabs/ecojs'
 import {
   EthDepositMessage,
   L1ToL2MessageReader,
   L1ToL2MessageReaderClassic
-} from '@arbitrum/sdk/dist/lib/message/L1ToL2Message'
+} from '@ecoblocklabs/ecojs/dist/lib/message/L1ToL2Message'
 import { AssetType } from 'token-bridge-sdk'
 import { useActions, useAppState } from '../../state'
 import { useInterval } from '../common/Hooks'

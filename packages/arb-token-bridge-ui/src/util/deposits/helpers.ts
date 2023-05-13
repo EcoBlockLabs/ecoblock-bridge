@@ -2,12 +2,12 @@ import {
   L1TransactionReceipt,
   L1ToL2MessageStatus,
   EthDepositStatus
-} from '@arbitrum/sdk'
+} from '@ecoblocklabs/ecojs'
 import {
   EthDepositMessage,
   L1ToL2MessageReader,
   L1ToL2MessageReaderClassic
-} from '@arbitrum/sdk/dist/lib/message/L1ToL2Message'
+} from '@ecoblocklabs/ecojs/dist/lib/message/L1ToL2Message'
 import { Provider } from '@ethersproject/providers'
 import { AssetType, getL1TokenData, Transaction } from 'token-bridge-sdk'
 

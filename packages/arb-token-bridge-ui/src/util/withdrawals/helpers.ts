@@ -11,7 +11,7 @@ import {
   getL1TokenData,
   getExecutedMessagesCacheKey
 } from 'token-bridge-sdk'
-import { L2ToL1MessageReader, L2TransactionReceipt } from '@arbitrum/sdk'
+import { L2ToL1MessageReader, L2TransactionReceipt } from '@ecoblocklabs/ecojs'
 import { FetchWithdrawalsFromSubgraphResult } from './fetchWithdrawalsFromSubgraph'
 
 export const updateAdditionalWithdrawalData = async (

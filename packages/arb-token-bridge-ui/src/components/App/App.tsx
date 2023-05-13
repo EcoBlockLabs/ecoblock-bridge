@@ -74,10 +74,10 @@ const AppContent = (): JSX.Element => {
   } = useAppState()
 
   const headerOverridesProps: HeaderOverridesProps = useMemo(() => {
-    const { isTestnet, isGoerli } = isNetwork(chain?.id ?? 0)
+    const { isTestnet, isSepolia } = isNetwork(chain?.id ?? 0)
     const className = isTestnet ? 'lg:bg-blue-arbitrum' : 'lg:bg-black'
 
-    if (isGoerli) {
+    if (isSepolia) {
       return { imageSrc: 'images/HeaderArbitrumLogoGoerli.webp', className }
     }
 

@@ -1,5 +1,5 @@
 import { Provider, BlockTag } from '@ethersproject/providers'
-import { Erc20Bridger } from '@arbitrum/sdk'
+import { Erc20Bridger } from '@ecoblocklabs/ecojs'
 
 /**
  * Fetches initiated token withdrawals from event logs in range of [fromBlock, toBlock].

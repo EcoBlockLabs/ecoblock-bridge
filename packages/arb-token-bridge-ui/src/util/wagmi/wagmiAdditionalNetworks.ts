@@ -1,22 +1,41 @@
 import { Chain } from 'wagmi'
 import { ChainId, rpcURLs } from '../networks'
 
-export const arbitrumNova: Chain = {
-  id: ChainId.ArbitrumNova,
-  name: 'Arbitrum Nova',
-  network: 'arbitrum-nova',
+export const ecoblock: Chain = {
+  id: ChainId.EcoBlock,
+  name: 'EcoBlock',
+  network: 'ecoblock',
   nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
   rpcUrls: {
     default: {
-      http: [rpcURLs[ChainId.ArbitrumNova]!]
+      http: [rpcURLs[ChainId.EcoBlock]!]
     },
     public: {
-      http: [rpcURLs[ChainId.ArbitrumNova]!]
+      http: [rpcURLs[ChainId.EcoBlock]!]
     }
   },
   blockExplorers: {
-    etherscan: { name: 'Arbiscan', url: 'https://nova.arbiscan.io' },
-    default: { name: 'Arbiscan', url: 'https://nova.arbiscan.io' }
+    etherscan: { name: 'Ecoscan', url: 'https://ecoscan.io' },
+    default: { name: 'Ecoscan', url: 'https://ecoscan.io' }
+  }
+}
+
+export const ecoblockSepolia: Chain = {
+  id: ChainId.EcoBlockSepolia,
+  name: 'EcoBlock Sepolia',
+  network: 'ecoblock-sepolia',
+  nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+  rpcUrls: {
+    default: {
+      http: [rpcURLs[ChainId.EcoBlockSepolia]!]
+    },
+    public: {
+      http: [rpcURLs[ChainId.EcoBlockSepolia]!]
+    }
+  },
+  blockExplorers: {
+    etherscan: { name: 'Ecoscan Testnet', url: 'https://testnet.ecoscan.io' },
+    default: { name: 'Ecoscan Testnet', url: 'https://testnet.ecoscan.io' }
   }
 }
 

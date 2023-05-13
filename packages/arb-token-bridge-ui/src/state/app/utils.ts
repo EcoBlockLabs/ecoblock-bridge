@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import { L1ToL2MessageStatus } from '@arbitrum/sdk'
+import { L1ToL2MessageStatus } from '@ecoblocklabs/ecojs'
 import { ethers, BigNumber } from 'ethers'
 import {
   L2ToL1EventResultPlus,

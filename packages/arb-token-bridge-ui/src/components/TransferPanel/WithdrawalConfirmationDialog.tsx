@@ -1,10 +1,6 @@
 import { useState } from 'react'
-import {
-  CheckIcon,
-  XIcon,
-  ExclamationCircleIcon
-} from '@heroicons/react/outline'
-import { Tab, Dialog as HeadlessUIDialog } from '@headlessui/react'
+import { CheckIcon, XIcon } from '@heroicons/react/outline'
+import { Dialog as HeadlessUIDialog, Tab } from '@headlessui/react'
 import dayjs from 'dayjs'
 import Image from 'next/image'
 
@@ -13,15 +9,13 @@ import { Checkbox } from '../common/Checkbox'
 import { ExternalLink } from '../common/ExternalLink'
 import { Button } from '../common/Button'
 import { TabButton } from '../common/Tab'
-import { BridgesTable } from '../common/BridgesTable'
 import { useNetworksAndSigners } from '../../hooks/useNetworksAndSigners'
 import { useAppState } from '../../state'
 import { trackEvent } from '../../util/AnalyticsUtils'
 import {
   getBlockTime,
   getConfirmPeriodBlocks,
-  getNetworkName,
-  isNetwork
+  getNetworkName
 } from '../../util/networks'
 import { getFastBridges } from '../../util/fastBridges'
 
@@ -85,8 +79,6 @@ export function WithdrawalConfirmationDialog(
     }`
   }
 
-  const { isArbitrumOne } = isNetwork(l2.network.chainID)
-
   function closeWithReset(confirmed: boolean) {
     props.onClose(confirmed)
 
@@ -108,28 +100,8 @@ export function WithdrawalConfirmationDialog(
           </div>
 
           <Tab.List className="bg-blue-arbitrum">
-            {isArbitrumOne && <TabButton>Use a third-party bridge</TabButton>}
-            <TabButton>Use Arbitrum’s bridge</TabButton>
+            <TabButton>Use EcoBlock’s bridge</TabButton>
           </Tab.List>
-
-          {isArbitrumOne && (
-            <Tab.Panel className="flex flex-col space-y-3 px-8 py-4">
-              <div className="flex flex-col space-y-3">
-                <p className="font-light">
-                  Get your funds in under 30 min with a fast exit bridge.
-                </p>
-
-                <div className="flex flex-row items-center space-x-1">
-                  <ExclamationCircleIcon className="h-6 w-6 text-orange-dark" />
-                  <span className="font-medium text-orange-dark">
-                    Security not guaranteed by Arbitrum
-                  </span>
-                </div>
-              </div>
-
-              <BridgesTable bridgeList={fastBridges} />
-            </Tab.Panel>
-          )}
 
           <Tab.Panel className="flex flex-col justify-between px-8 py-4 md:min-h-[430px]">
             <div className="flex flex-col space-y-6">

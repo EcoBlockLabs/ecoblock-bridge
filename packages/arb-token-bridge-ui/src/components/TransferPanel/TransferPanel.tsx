@@ -11,7 +11,7 @@ import {
   useBalance,
   getL1TokenAllowance
 } from 'token-bridge-sdk'
-import { ERC20__factory } from '@arbitrum/sdk/dist/lib/abi/factories/ERC20__factory'
+import { ERC20__factory } from '@ecoblocklabs/ecojs/dist/lib/abi/factories/ERC20__factory'
 import { JsonRpcProvider } from '@ethersproject/providers'
 
 import { useAppState } from '../../state'
@@ -149,7 +149,6 @@ export function TransferPanel() {
     useAppContextActions()
 
   const { isMainnet } = isNetwork(l1Network.chainID)
-  const { isArbitrumNova } = isNetwork(l2Network.chainID)
 
   const latestEth = useLatest(eth)
   const latestToken = useLatest(token)
@@ -978,7 +977,7 @@ export function TransferPanel() {
               }}
               className={twMerge(
                 'w-full bg-eth-dark py-4 text-lg lg:text-2xl',
-                isArbitrumNova ? 'bg-arb-nova-dark' : 'bg-arb-one-dark'
+                'bg-arb-nova-dark'
               )}
             >
               {isSmartContractWallet && isTransferring

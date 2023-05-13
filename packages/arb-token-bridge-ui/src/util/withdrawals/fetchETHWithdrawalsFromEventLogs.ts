@@ -1,5 +1,5 @@
 import { Provider, BlockTag } from '@ethersproject/providers'
-import { L2ToL1MessageReader } from '@arbitrum/sdk'
+import { L2ToL1MessageReader } from '@ecoblocklabs/ecojs'
 
 /**
  * Fetches initiated ETH withdrawals from event logs in range of [fromBlock, toBlock].

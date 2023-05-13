@@ -9,7 +9,7 @@ import {
   l2wstETHGatewayAddresses
 } from '../util/networks'
 import { Provider } from '@ethersproject/providers'
-import { L2Network, getL2Network } from '@arbitrum/sdk'
+import { L2Network, getL2Network } from '@ecoblocklabs/ecojs'
 
 export const useL2Gateways = ({ l2Provider }: { l2Provider: Provider }) => {
   const [l2Network, setL2Network] = useState<L2Network | undefined>(undefined)

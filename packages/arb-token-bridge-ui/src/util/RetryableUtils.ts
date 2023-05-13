@@ -1,7 +1,7 @@
 import {
   L1TransactionReceipt,
   L1ToL2MessageWriter as IL1ToL2MessageWriter
-} from '@arbitrum/sdk'
+} from '@ecoblocklabs/ecojs'
 import { Signer } from '@ethersproject/abstract-signer'
 import { Provider } from '@ethersproject/abstract-provider'
 import dayjs from 'dayjs'

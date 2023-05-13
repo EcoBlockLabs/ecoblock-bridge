@@ -18,12 +18,11 @@ import { ExternalLink } from '../common/ExternalLink'
 import { Loader } from '../common/atoms/Loader'
 
 const getOtherL2NetworkChainId = (chainId: number) => {
-  if (!isNetwork(chainId).isArbitrumOne && !isNetwork(chainId).isArbitrumNova) {
+  if (!isNetwork(chainId).isEcoBlock) {
     console.warn(`[getOtherL2NetworkChainId] Unexpected chain id: ${chainId}`)
   }
-  return isNetwork(chainId).isArbitrumOne
-    ? ChainId.ArbitrumNova
-    : ChainId.ArbitrumOne
+  // Currently, we have one L2 networks mainnet only
+  return ChainId.EcoBlock
 }
 
 export const PendingTransactions = ({
@@ -44,9 +43,7 @@ export const PendingTransactions = ({
     onError: handleSwitchNetworkError
   })
 
-  const bgClassName = isNetwork(l2Network.chainID).isArbitrumNova
-    ? 'bg-gray-10'
-    : 'bg-blue-arbitrum'
+  const bgClassName = 'bg-gray-10'
 
   return (
     <div

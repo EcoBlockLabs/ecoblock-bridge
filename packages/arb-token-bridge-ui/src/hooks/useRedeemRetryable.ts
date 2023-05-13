@@ -2,7 +2,7 @@ import { useState } from 'react'
 import {
   L1ToL2MessageWriter as IL1ToL2MessageWriter,
   L1ToL2MessageStatus
-} from '@arbitrum/sdk'
+} from '@ecoblocklabs/ecojs'
 import { useSigner } from 'wagmi'
 
 import { useAppState } from '../state'

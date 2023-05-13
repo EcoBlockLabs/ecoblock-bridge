@@ -1,5 +1,5 @@
 import { Transaction, AssetType } from '../../../src/token-bridge-sdk'
-import { L1ToL2MessageStatus } from '@arbitrum/sdk'
+import { L1ToL2MessageStatus } from '@ecoblocklabs/ecojs'
 
 import { shortenTxHash } from '../../../src/util/CommonUtils'
 

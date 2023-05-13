@@ -21,7 +21,12 @@ import {
   StaticJsonRpcProvider,
   Web3Provider
 } from '@ethersproject/providers'
-import { L1Network, L2Network, getL1Network, getL2Network } from '@arbitrum/sdk'
+import {
+  L1Network,
+  L2Network,
+  getL1Network,
+  getL2Network
+} from '@ecoblocklabs/ecojs'
 import { useAccount, useNetwork, useProvider } from 'wagmi'
 import { useConnectModal } from '@rainbow-me/rainbowkit'
 import { useLocalStorage } from 'react-use'

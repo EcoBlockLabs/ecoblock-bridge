@@ -14,7 +14,7 @@ import {
   Transaction,
   TxnType
 } from 'token-bridge-sdk'
-import { L1ToL2MessageStatus } from '@arbitrum/sdk'
+import { L1ToL2MessageStatus } from '@ecoblocklabs/ecojs'
 
 import { ConnectionState } from '../../util'
 import {

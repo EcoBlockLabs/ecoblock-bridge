@@ -9,10 +9,10 @@ import {
   FiatOnRampName
 } from '../components/TransferPanel/LowBalanceDialogContent'
 import {
+  FastBridgeNames,
   NonCanonicalTokenAddresses,
   NonCanonicalTokenNames,
-  NonCanonicalTokenSupportedBridges,
-  FastBridgeNames
+  NonCanonicalTokenSupportedBridges
 } from './fastBridges'
 import { ProviderName } from '../hooks/useNetworksAndSigners'
 import { getNetworkName } from './networks'
@@ -30,7 +30,7 @@ type AssetType = 'ETH' | 'ERC-20'
 type FastBridgeName = `${FastBridgeNames}`
 type NonCanonicalTokenName = `${NonCanonicalTokenNames}`
 
-const AnalyticsNetworkNames = ['Arbitrum One', 'Arbitrum Nova'] as const
+const AnalyticsNetworkNames = ['EcoBlock'] as const
 type AllNetworkNames = ReturnType<typeof getNetworkName>
 type AnalyticsNetworkName = (typeof AnalyticsNetworkNames)[number]
 export const shouldTrackAnalytics = (
@@ -62,7 +62,7 @@ export type FathomEventMap =
   | `Fiat On-Ramp Click: ${FiatOnRampName}`
   //
   | `Fast Bridge Click: ${FastBridgeName}`
-  | `${NonCanonicalTokenName}: Use Arbitrum Bridge Click`
+  | `${NonCanonicalTokenName}: Use EcoBlock Bridge Click`
   | `${NonCanonicalTokenName}: Copy Bridge Link Click`
   //
   | `Slow Bridge Click`
@@ -93,22 +93,14 @@ const fathomEventToEventId: { [key in FathomEventMap]: string } & {
   'Connect Wallet Click: Ledger': 'EBS4HGEH',
   'Connect Wallet Click: Other': 'V700XEJ1',
   //
-  'Deposit ETH to Arbitrum One (EOA)': 'UL9WSZQO',
-  'Deposit ETH to Arbitrum One (Smart Contract)': 'HMAEKCNM',
-  'Deposit ETH to Arbitrum Nova (EOA)': 'QAIO4AJ1',
-  'Deposit ETH to Arbitrum Nova (Smart Contract)': 'JEJCCAX5',
-  'Deposit ERC-20 to Arbitrum One (EOA)': 'JFSNEA7Z',
-  'Deposit ERC-20 to Arbitrum One (Smart Contract)': 'W26LHYUZ',
-  'Deposit ERC-20 to Arbitrum Nova (EOA)': 'K1VGFDC5',
-  'Deposit ERC-20 to Arbitrum Nova (Smart Contract)': 'WFVNXUXA',
-  'Withdraw ETH from Arbitrum One (EOA)': 'PACZDLXE',
-  'Withdraw ETH from Arbitrum One (Smart Contract)': 'F3N3OBE9',
-  'Withdraw ETH from Arbitrum Nova (EOA)': 'MGEAJZ7A',
-  'Withdraw ETH from Arbitrum Nova (Smart Contract)': 'RML4LVRI',
-  'Withdraw ERC-20 from Arbitrum One (EOA)': '9B33K1F3',
-  'Withdraw ERC-20 from Arbitrum One (Smart Contract)': 'A2GD3YQA',
-  'Withdraw ERC-20 from Arbitrum Nova (EOA)': '4KA57CQE',
-  'Withdraw ERC-20 from Arbitrum Nova (Smart Contract)': '4VA53F84',
+  'Deposit ETH to EcoBlock (EOA)': 'QAIO4AJ1',
+  'Deposit ETH to EcoBlock (Smart Contract)': 'JEJCCAX5',
+  'Deposit ERC-20 to EcoBlock (EOA)': 'K1VGFDC5',
+  'Deposit ERC-20 to EcoBlock (Smart Contract)': 'WFVNXUXA',
+  'Withdraw ETH from EcoBlock (EOA)': 'MGEAJZ7A',
+  'Withdraw ETH from EcoBlock (Smart Contract)': 'RML4LVRI',
+  'Withdraw ERC-20 from EcoBlock (EOA)': '4KA57CQE',
+  'Withdraw ERC-20 from EcoBlock (Smart Contract)': '4VA53F84',
   //
   'Explore: DeFi Project Click: Uniswap': 'GD30QTVK',
   'Explore: DeFi Project Click: SushiSwap': '1FSKVH8U',
@@ -172,7 +164,7 @@ const fathomEventToEventId: { [key in FathomEventMap]: string } & {
   'Fast Bridge Click: Stargate': '6VZXVGEQ',
   //
   'FRAX: Fast Bridge Click: Celer': '6PZJPSBO',
-  'FRAX: Use Arbitrum Bridge Click': 'THMMEGSP',
+  'FRAX: Use EcoBlock Bridge Click': 'THMMEGSP',
   'FRAX: Copy Bridge Link Click': 'WWJ8WGXM',
   //
   'Slow Bridge Click': '9CEY3IGM',
@@ -181,16 +173,13 @@ const fathomEventToEventId: { [key in FathomEventMap]: string } & {
   //
   'Switch Network and Transfer': '4F5SKZRG',
   //
-  'Redeem Retryable on Arbitrum One': 'UHPNE3XJ',
-  'Redeem Retryable on Arbitrum Nova': 'AQDHUKER',
+  'Redeem Retryable on EcoBlock': 'AQDHUKER',
   //
   'Open Transaction History Click': 'BNE3W7KB',
   'Open Transaction History Click: Tx Info Banner': 'I9AMOFHA',
   //
-  'Tx Error: Get Help Click on Arbitrum One': 'HT1BWVVI',
-  'Tx Error: Get Help Click on Arbitrum Nova': 'XD5VYLPU',
-  'Multiple Tx Error: Get Help Click on Arbitrum One': 'CWMVRSXW',
-  'Multiple Tx Error: Get Help Click on Arbitrum Nova': '2VOXN4FB'
+  'Tx Error: Get Help Click on EcoBlock': 'XD5VYLPU',
+  'Multiple Tx Error: Get Help Click on EcoBlock': '2VOXN4FB'
 }
 
 type AnalyticsEventMap = {
@@ -219,7 +208,7 @@ type AnalyticsEventMap = {
       | NonCanonicalTokenSupportedBridges<NonCanonicalTokenAddresses.FRAX>
     tokenSymbol?: NonCanonicalTokenName
   }
-  'Use Arbitrum Bridge Click': { tokenSymbol: NonCanonicalTokenName }
+  'Use EcoBlock Bridge Click': { tokenSymbol: NonCanonicalTokenName }
   'Copy Bridge Link Click': { tokenSymbol: NonCanonicalTokenName }
   'Switch Network and Transfer': {
     type: 'Deposit' | 'Withdrawal'
@@ -297,11 +286,11 @@ function payloadToFathomEvent<T extends AnalyticsEvent>(
       return `Tx Error: Get Help Click on ${
         (properties as AnalyticsEventMap['Tx Error: Get Help Click']).network
       }`
-    case 'Use Arbitrum Bridge Click':
+    case 'Use EcoBlock Bridge Click':
       return `${
-        (properties as AnalyticsEventMap['Use Arbitrum Bridge Click'])
+        (properties as AnalyticsEventMap['Use EcoBlock Bridge Click'])
           .tokenSymbol
-      }: Use Arbitrum Bridge Click`
+      }: Use EcoBlock Bridge Click`
     case 'Copy Bridge Link Click':
       return `${
         (properties as AnalyticsEventMap['Copy Bridge Link Click']).tokenSymbol

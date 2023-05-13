@@ -7,7 +7,7 @@ import useSWR, {
   Middleware,
   SWRHook
 } from 'swr'
-import { MultiCaller } from '@arbitrum/sdk'
+import { MultiCaller } from '@ecoblocklabs/ecojs'
 
 import { useChainId } from './useChainId'
 

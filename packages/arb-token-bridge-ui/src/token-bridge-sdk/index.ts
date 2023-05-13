@@ -16,7 +16,7 @@ export type {
   L2ToL1MessageData
 } from './hooks/useTransactions'
 
-export { ERC20__factory } from '@arbitrum/sdk/dist/lib/abi/factories/ERC20__factory'
+export { ERC20__factory } from '@ecoblocklabs/ecojs/dist/lib/abi/factories/ERC20__factory'
 
 export {
   getDefaultTokenName,

@@ -17,7 +17,7 @@ import { TabButton } from '../common/Tab'
 import { BridgesTable } from '../common/BridgesTable'
 import { useAppState } from '../../state'
 import { useNetworksAndSigners } from '../../hooks/useNetworksAndSigners'
-import { getNetworkName, isNetwork } from '../../util/networks'
+import { getNetworkName } from '../../util/networks'
 import { trackEvent } from '../../util/AnalyticsUtils'
 
 export function DepositConfirmationDialog(
@@ -28,7 +28,6 @@ export function DepositConfirmationDialog(
   } = useAppState()
   const { l1, l2, isConnectedToArbitrum } = useNetworksAndSigners()
   const networkName = getNetworkName(l2.network.chainID)
-  const { isArbitrumOne } = isNetwork(l2.network.chainID)
 
   const [, copyToClipboard] = useCopyToClipboard()
   const [showCopied, setShowCopied] = useState(false)
@@ -83,11 +82,10 @@ export function DepositConfirmationDialog(
           </div>
 
           <Tab.List className="bg-blue-arbitrum">
-            {isArbitrumOne && <TabButton>Use a third-party bridge</TabButton>}
-            <TabButton>Use Arbitrum’s bridge</TabButton>
+            <TabButton>Use EcoBlock’s bridge</TabButton>
           </Tab.List>
 
-          {isArbitrumOne && tokenSymbol && (
+          {tokenSymbol && (
             <Tab.Panel className="flex flex-col space-y-3 px-8 py-4">
               <div className="flex flex-col space-y-3">
                 <p className="font-light">
@@ -123,12 +121,12 @@ export function DepositConfirmationDialog(
             <Tab.Panel className="flex flex-col space-y-3 px-8 py-4">
               <div className="flex flex-col space-y-3">
                 <p className="font-light">
-                  If you choose to use Arbitrum’s bridge instead, you’ll have to
+                  If you choose to use EcoBlock’s bridge instead, you’ll have to
                   do two transfers.
                 </p>
                 <ol className="list-decimal px-4 font-light">
                   <li>
-                    Transfer on Arbitrum’s bridge to get {tokenSymbolOnArbitrum}
+                    Transfer on EcoBlock’s bridge to get {tokenSymbolOnArbitrum}
                   </li>
                   <li>
                     Transfer on {tokenSymbol}&apos;s bridge to swap{' '}
@@ -168,7 +166,7 @@ export function DepositConfirmationDialog(
                   variant="primary"
                   onClick={() => {
                     props.onClose(true)
-                    trackEvent('Use Arbitrum Bridge Click', { tokenSymbol })
+                    trackEvent('Use EcoBlock Bridge Click', { tokenSymbol })
                   }}
                 >
                   I want to do two swaps

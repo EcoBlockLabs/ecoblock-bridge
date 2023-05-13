@@ -4,7 +4,7 @@
 
 import { StaticJsonRpcProvider } from '@ethersproject/providers'
 import { BigNumber } from 'ethers'
-import { MultiCaller } from '@arbitrum/sdk'
+import { MultiCaller } from '@ecoblocklabs/ecojs'
 
 export type NetworkType = 'L1' | 'L2'
 export type NetworkName =
