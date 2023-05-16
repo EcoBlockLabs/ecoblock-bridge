@@ -61,7 +61,7 @@ export function Notifications() {
 
   return (
     <NotificationContainer>
-      {isSepolia && <NitroDevnetNotification />}
+      {/*{isSepolia && <NitroDevnetNotification />}*/}
     </NotificationContainer>
   )
 }

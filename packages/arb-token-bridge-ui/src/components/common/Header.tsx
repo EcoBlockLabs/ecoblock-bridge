@@ -29,6 +29,21 @@ function toHeaderMenuProps(
   }
 }
 
+const ecosystemProps = [
+  {
+    title: 'Homepage',
+    anchorProps: { href: 'https://ecoblock.tech' }
+  },
+  {
+    title: 'Documents',
+    anchorProps: { href: 'https://docs.ecoblock.tech' }
+  },
+  {
+    title: 'Block Explorer',
+    anchorProps: { href: 'https://ecoscan.io' }
+  }
+]
+
 const learnMenuProps = toHeaderMenuProps([
   {
     title: 'Dev docs',
@@ -213,35 +228,19 @@ export function Header() {
           <a href="/" className="arb-hover flex flex-col items-center">
             <HeaderImageElement
               src={HeaderLogoMainnetSVG}
-              alt="Arbitrum logo"
+              alt="EcoBlock logo"
             />
           </a>
           <div className="hidden items-center lg:flex lg:space-x-2 xl:space-x-6">
-            <HeaderMenuDesktop {...learnMenuProps}>Learn</HeaderMenuDesktop>
-            <HeaderMenuDesktop
-              items={[
-                {
-                  title: 'Arbitrum One Portal',
-                  anchorProps: { href: 'https://portal.arbitrum.one' }
-                },
-                {
-                  title: 'Arbitrum Nova Portal',
-                  anchorProps: { href: 'https://portal-nova.arbitrum.io' }
-                },
-                {
-                  title: 'Explorers',
-                  items: explorersMenuProps.items
-                }
-              ]}
-            >
+            <HeaderMenuDesktop items={ecosystemProps}>
               Ecosystem
             </HeaderMenuDesktop>
-            <HeaderMenuDesktop {...chartsStatsMenuProps}>
-              Charts & Stats
-            </HeaderMenuDesktop>
-            <DesktopExternalLink href={GET_HELP_LINK}>
-              Get Help
-            </DesktopExternalLink>
+            {/*<HeaderMenuDesktop {...chartsStatsMenuProps}>*/}
+            {/*  Charts & Stats*/}
+            {/*</HeaderMenuDesktop>*/}
+            {/*<DesktopExternalLink href={GET_HELP_LINK}>*/}
+            {/*  Get Help*/}
+            {/*</DesktopExternalLink>*/}
           </div>
         </div>
         <Disclosure>
@@ -323,52 +322,41 @@ function HeaderMobile() {
           id="header-content-root"
           className="flex w-full flex-col-reverse items-center pt-4"
         ></div>
-        <HeaderMenuMobile {...learnMenuProps}>
-          <HeaderItemLogo
-            src="/images/header/headerLogo_learn.svg"
-            alt="Learn"
-          />
-          Learn
-        </HeaderMenuMobile>
-        <HeaderMenuMobile
-          items={[
-            {
-              title: 'Arbitrum One Portal',
-              anchorProps: { href: 'https://portal.arbitrum.one' }
-            },
-            {
-              title: 'Arbitrum Nova Portal',
-              anchorProps: { href: 'https://portal-nova.arbitrum.io' }
-            }
-          ]}
-        >
+        {/*<HeaderMenuMobile {...learnMenuProps}>*/}
+        {/*  <HeaderItemLogo*/}
+        {/*    src="/images/header/headerLogo_learn.svg"*/}
+        {/*    alt="Learn"*/}
+        {/*  />*/}
+        {/*  Learn*/}
+        {/*</HeaderMenuMobile>*/}
+        <HeaderMenuMobile items={ecosystemProps}>
           <HeaderItemLogo
             src="/images/header/headerLogo_ecosystem.svg"
             alt="Ecosystem"
           />
           Ecosystem
         </HeaderMenuMobile>
-        <HeaderMenuMobile {...explorersMenuProps}>
-          <HeaderItemLogo
-            src="/images/header/headerLogo_explorers.svg"
-            alt="Explorers"
-          />
-          Explorers
-        </HeaderMenuMobile>
-        <HeaderMenuMobile {...chartsStatsMenuProps}>
-          <HeaderItemLogo
-            src="/images/header/headerLogo_chartsAndStats.svg"
-            alt="Charts and Stats"
-          />
-          Charts & Stats
-        </HeaderMenuMobile>
-        <MobileExternalLink href={GET_HELP_LINK}>
-          <HeaderItemLogo
-            src="/images/header/headerLogo_help.svg"
-            alt="Get Help"
-          />
-          Get Help
-        </MobileExternalLink>
+        {/*<HeaderMenuMobile {...explorersMenuProps}>*/}
+        {/*  <HeaderItemLogo*/}
+        {/*    src="/images/header/headerLogo_explorers.svg"*/}
+        {/*    alt="Explorers"*/}
+        {/*  />*/}
+        {/*  Explorers*/}
+        {/*</HeaderMenuMobile>*/}
+        {/*<HeaderMenuMobile {...chartsStatsMenuProps}>*/}
+        {/*  <HeaderItemLogo*/}
+        {/*    src="/images/header/headerLogo_chartsAndStats.svg"*/}
+        {/*    alt="Charts and Stats"*/}
+        {/*  />*/}
+        {/*  Charts & Stats*/}
+        {/*</HeaderMenuMobile>*/}
+        {/*<MobileExternalLink href={GET_HELP_LINK}>*/}
+        {/*  <HeaderItemLogo*/}
+        {/*    src="/images/header/headerLogo_help.svg"*/}
+        {/*    alt="Get Help"*/}
+        {/*  />*/}
+        {/*  Get Help*/}
+        {/*</MobileExternalLink>*/}
       </div>
     </div>
   )

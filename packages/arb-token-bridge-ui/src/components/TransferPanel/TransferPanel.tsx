@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect, useCallback } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import Tippy from '@tippyjs/react'
 import { BigNumber, constants, utils } from 'ethers'
 import { isAddress } from 'ethers/lib/utils'
@@ -8,8 +8,8 @@ import * as Sentry from '@sentry/react'
 import { useAccount, useProvider, useSigner, useSwitchNetwork } from 'wagmi'
 import {
   ArbTokenBridge,
-  useBalance,
-  getL1TokenAllowance
+  getL1TokenAllowance,
+  useBalance
 } from 'token-bridge-sdk'
 import { ERC20__factory } from '@ecoblocklabs/ecojs/dist/lib/abi/factories/ERC20__factory'
 import { JsonRpcProvider } from '@ethersproject/providers'
@@ -38,7 +38,7 @@ import { WithdrawalConfirmationDialog } from './WithdrawalConfirmationDialog'
 import { DepositConfirmationDialog } from './DepositConfirmationDialog'
 import { TransferPanelSummary, useGasSummary } from './TransferPanelSummary'
 import { useAppContextActions, useAppContextState } from '../App/AppContext'
-import { trackEvent, shouldTrackAnalytics } from '../../util/AnalyticsUtils'
+import { shouldTrackAnalytics, trackEvent } from '../../util/AnalyticsUtils'
 import {
   TransferPanelMain,
   TransferPanelMainErrorMessage
@@ -929,19 +929,7 @@ export function TransferPanel() {
 
         <div className="border-r border-gray-3" />
 
-        <div
-          style={
-            isSummaryVisible
-              ? {}
-              : {
-                  background: `url(/images/ArbitrumFaded.webp)`,
-                  backgroundSize: 'contain',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundPosition: 'center'
-                }
-          }
-          className="transfer-panel-stats flex w-full flex-col justify-between bg-gray-2 px-6 py-6 lg:rounded-br-xl lg:rounded-tr-xl lg:bg-white lg:px-0 lg:pr-6"
-        >
+        <div className="transfer-panel-stats flex w-full flex-col justify-between bg-gray-2 px-6 py-6 lg:rounded-br-xl lg:rounded-tr-xl lg:bg-white lg:px-0 lg:pr-6">
           <div className="flex flex-col">
             <div className="hidden lg:block">
               <span className="text-2xl text-gray-10">Summary</span>

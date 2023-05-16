@@ -9,29 +9,24 @@ type FooterLink = {
 
 const footerLinks: FooterLink[] = [
   {
-    title: 'Documentation',
-    href: 'https://developer.offchainlabs.com/docs/developer_quickstart',
+    title: 'Homepage',
+    href: 'https://ecoblock.tech',
     lgOrder: 1
   },
   {
-    title: 'Careers',
-    href: 'https://offchainlabs.com/careers',
-    lgOrder: 4
-  },
-  {
-    title: 'Blog',
-    href: 'https://medium.com/offchainlabs',
+    title: 'Documentation',
+    href: 'https://docs.ecoblock.tech',
     lgOrder: 2
   },
   {
-    title: 'Recent Press',
-    href: 'https://offchainlabs.com/#press',
-    lgOrder: 5
+    title: 'Block Explorer',
+    href: 'https://ecoscan.io',
+    lgOrder: 3
   },
   {
     title: 'ToS',
     href: '/tos',
-    lgOrder: 3
+    lgOrder: 4
   }
 ]
 
@@ -42,7 +37,7 @@ export function Footer() {
         <div className="flex flex-col items-center space-y-2 px-8 text-center lg:items-start lg:px-0">
           <span className="text-4xl">The most decentralized L2</span>
           <ExternalLink
-            href="https://developer.arbitrum.io"
+            href="https://docs.ecoblock.tech"
             className="text-2xl underline"
           >
             Learn more.

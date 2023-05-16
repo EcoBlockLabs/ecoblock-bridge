@@ -193,7 +193,6 @@ function NetworkContainer({
     }
 
     return {
-      backgroundImage: `url('/images/ArbitrumNovaLogo.svg')`,
       backgroundClassName: 'bg-arb-nova-dark'
     }
   }, [network])
