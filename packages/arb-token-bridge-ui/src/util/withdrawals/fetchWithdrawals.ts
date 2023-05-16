@@ -4,14 +4,12 @@ import { fetchETHWithdrawalsFromEventLogs } from './fetchETHWithdrawalsFromEvent
 
 import {
   mapETHWithdrawalToL2ToL1EventResult,
-  mapTokenWithdrawalFromEventLogsToL2ToL1EventResult,
   mapWithdrawalToL2ToL1EventResult,
   updateAdditionalWithdrawalData
 } from './helpers'
 import { fetchWithdrawalsFromSubgraph } from './fetchWithdrawalsFromSubgraph'
 import { tryFetchLatestSubgraphBlockNumber } from '../SubgraphUtils'
 import { L2ToL1EventResultPlus } from 'token-bridge-sdk'
-import { fetchTokenWithdrawalsFromEventLogs } from './fetchTokenWithdrawalsFromEventLogs'
 
 export type FetchWithdrawalsParams = {
   walletAddress: string
@@ -59,8 +57,8 @@ export const fetchWithdrawals = async ({
 
   const [
     withdrawalsFromSubgraph,
-    ethWithdrawalsFromEventLogs,
-    tokenWithdrawalsFromEventLogs
+    ethWithdrawalsFromEventLogs
+    // tokenWithdrawalsFromEventLogs
   ] = await Promise.all([
     fetchWithdrawalsFromSubgraph({
       address: walletAddress,
@@ -76,14 +74,14 @@ export const fetchWithdrawals = async ({
       fromBlock: toBlock + 1,
       toBlock: 'latest',
       l2Provider: l2Provider
-    }),
-    fetchTokenWithdrawalsFromEventLogs({
-      address: walletAddress,
-      fromBlock: toBlock + 1,
-      toBlock: 'latest',
-      l2Provider: l2Provider,
-      l2GatewayAddresses: gatewayAddresses
     })
+    // fetchTokenWithdrawalsFromEventLogs({
+    //   address: walletAddress,
+    //   fromBlock: toBlock + 1,
+    //   toBlock: 'latest',
+    //   l2Provider: l2Provider,
+    //   l2GatewayAddresses: gatewayAddresses
+    // })
   ])
 
   const l2ToL1Txns = (
@@ -103,21 +101,20 @@ export const fetchWithdrawals = async ({
           l2Provider,
           l2ChainID
         )
-      ),
-      ...tokenWithdrawalsFromEventLogs.map(withdrawal =>
-        mapTokenWithdrawalFromEventLogsToL2ToL1EventResult(
-          withdrawal,
-          l1Provider,
-          l2Provider,
-          l2ChainID,
-          walletAddress
-        )
       )
+      // ...tokenWithdrawalsFromEventLogs.map(withdrawal =>
+      //   mapTokenWithdrawalFromEventLogsToL2ToL1EventResult(
+      //     withdrawal,
+      //     l1Provider,
+      //     l2Provider,
+      //     l2ChainID,
+      //     walletAddress
+      //   )
+      // )
     ])
   )
     .filter((msg): msg is L2ToL1EventResultPlus => typeof msg !== 'undefined')
     .sort((msgA, msgB) => +msgA.timestamp - +msgB.timestamp)
-
   const finalL2ToL1Txns: L2ToL1EventResultPlus[] = await Promise.all(
     l2ToL1Txns.map(withdrawal =>
       updateAdditionalWithdrawalData(withdrawal, l1Provider, l2Provider)
