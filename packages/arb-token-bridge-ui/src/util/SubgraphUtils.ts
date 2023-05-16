@@ -1,5 +1,5 @@
 import fetch from 'cross-fetch'
-import { ApolloClient, HttpLink, InMemoryCache, gql } from '@apollo/client'
+import { ApolloClient, gql, HttpLink, InMemoryCache } from '@apollo/client'
 
 const L1SubgraphClient = {
   ArbitrumOne: new ApolloClient({
@@ -22,6 +22,13 @@ const L1SubgraphClient = {
       fetch
     }),
     cache: new InMemoryCache()
+  }),
+  EcoBlockSepolia: new ApolloClient({
+    link: new HttpLink({
+      uri: 'https://api.studio.thegraph.com/query/46786/ecoblock-testnet-bridge/v0.0.2',
+      fetch
+    }),
+    cache: new InMemoryCache()
   })
 }
 
@@ -39,11 +46,22 @@ const L2SubgraphClient = {
       fetch
     }),
     cache: new InMemoryCache()
+  }),
+  EcoBlockSepolia: new ApolloClient({
+    link: new HttpLink({
+      uri: 'https://graph-node-testnet.ecoblock.tech/subgraphs/name/ecoblock-testnet-layer2-token-gateway',
+      fetch
+    }),
+    cache: new InMemoryCache()
   })
 }
 
 export function getL1SubgraphClient(l2ChainId: number) {
   switch (l2ChainId) {
+    // TODO add ecoblock mainnet
+    case 621:
+      return L1SubgraphClient.EcoBlockSepolia
+
     case 42161:
       return L1SubgraphClient.ArbitrumOne
 
@@ -60,6 +78,10 @@ export function getL1SubgraphClient(l2ChainId: number) {
 
 export function getL2SubgraphClient(l2ChainId: number) {
   switch (l2ChainId) {
+    // TODO add ecoblock mainnet
+    case 621:
+      return L2SubgraphClient.EcoBlockSepolia
+
     case 42161:
       return L2SubgraphClient.ArbitrumOne
 
@@ -114,6 +136,7 @@ export const tryFetchLatestSubgraphBlockNumber = async (
   try {
     return await fetchBlockNumberFromSubgraph(chainType, l2ChainID)
   } catch (error) {
+    console.log('Cannot fetch block numer from subgraph', error)
     // In case the subgraph is not supported or down, fall back to fetching everything through event logs
     return 0
   }
