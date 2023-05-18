@@ -27,7 +27,6 @@ yarn-error.log*
 
 # built hooks files
 /dist
-.env
 
 # Local Netlify folder
 .netlify
