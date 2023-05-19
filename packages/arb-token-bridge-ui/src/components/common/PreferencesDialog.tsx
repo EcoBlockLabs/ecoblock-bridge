@@ -41,22 +41,24 @@ export const PreferencesDialog = () => {
     >
       <div className="flex w-full flex-col items-center gap-8 text-white">
         {/* Theme selection radio */}
-        <div className="w-full">
-          <SectionTitle>Theme</SectionTitle>
-          <div className="flex w-full flex-col gap-2">
-            <Radio
-              orientation="vertical"
-              value={selectedTheme}
-              onChange={setTheme}
-              options={THEME_CONFIG.map(theme => ({
-                label: theme.label,
-                description: theme.description,
-                value: theme.id,
-                id: theme.id
-              }))}
-            />
+        {THEME_CONFIG.length > 1 && (
+          <div className="w-full">
+            <SectionTitle>Theme</SectionTitle>
+            <div className="flex w-full flex-col gap-2">
+              <Radio
+                orientation="vertical"
+                value={selectedTheme}
+                onChange={setTheme}
+                options={THEME_CONFIG.map(theme => ({
+                  label: theme.label,
+                  description: theme.description,
+                  value: theme.id,
+                  id: theme.id
+                }))}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Arbitrum stats toggle */}
         <div className="w-full">

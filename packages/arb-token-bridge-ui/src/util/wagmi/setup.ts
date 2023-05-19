@@ -27,11 +27,11 @@ const chainList = isTestingEnvironment
       arbitrumLocal
     ]
   : [mainnet, ecoblock, sepolia, ecoblockSepolia]
-
+console.log('chainList is: ', chainList)
 const { chains, provider } = configureChains(chainList, [publicProvider()])
 
 const appInfo = {
-  appName: 'Bridge to Arbitrum'
+  appName: 'Bridge to EcoBlock'
 }
 
 const { wallets } = getDefaultWallets({

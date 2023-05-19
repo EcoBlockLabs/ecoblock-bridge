@@ -56,7 +56,7 @@ export function Footer() {
           </ul>
           <div className="flex flex-row justify-center space-x-6 lg:hidden">
             <ExternalLink
-              href="https://discord.com/invite/ZpZuw7p"
+              href="https://discord.com/#"
               className="arb-hover h-8 w-8"
             >
               <Image
@@ -67,7 +67,7 @@ export function Footer() {
               />
             </ExternalLink>
             <ExternalLink
-              href="https://twitter.com/OffchainLabs"
+              href="https://twitter.com/#"
               className="arb-hover h-8 w-8"
             >
               <Image

@@ -11,13 +11,13 @@ export const THEME_CONFIG = [
     label: 'Space',
     description:
       'A dark, space-themed UI with a sleek and futuristic aesthetic, featuring Arbinaut on a backdrop of shining stars and moon.'
-  },
-  {
-    id: classicThemeKey,
-    label: 'Arbitrum Classic',
-    description:
-      'Arbitrum before it was cool: A reminiscent of the pre-nitro era, with simple, solid buttons, a minimal purple layout and chunky fonts.'
   }
+  // {
+  //   id: classicThemeKey,
+  //   label: 'Arbitrum Classic',
+  //   description:
+  //     'Arbitrum before it was cool: A reminiscent of the pre-nitro era, with simple, solid buttons, a minimal purple layout and chunky fonts.'
+  // }
 ]
 
 export const useTheme = () => {

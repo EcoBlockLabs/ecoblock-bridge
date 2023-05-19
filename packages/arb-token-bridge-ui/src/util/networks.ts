@@ -288,7 +288,7 @@ export function getNetworkName(chainId: number) {
       return 'Mainnet'
 
     case ChainId.Sepolia:
-      return 'Sepolia'
+      return 'Sepolia Testnet'
 
     case ChainId.Local:
       return 'Ethereum'

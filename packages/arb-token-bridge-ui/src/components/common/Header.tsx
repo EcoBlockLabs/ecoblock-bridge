@@ -44,55 +44,6 @@ const ecosystemProps = [
   }
 ]
 
-const learnMenuProps = toHeaderMenuProps([
-  {
-    title: 'Dev docs',
-    link: 'https://developer.offchainlabs.com'
-  },
-  {
-    title: 'About bridging',
-    link: 'https://arbitrum.io/bridge-tutorial'
-  },
-  {
-    title: 'About Arbitrum',
-    link: 'https://developer.offchainlabs.com/docs/inside_arbitrum'
-  }
-])
-
-const explorersMenuProps = toHeaderMenuProps([
-  {
-    title: 'Arbitrum One',
-    link: 'https://arbiscan.io'
-  },
-  {
-    title: 'Arbitrum Nova',
-    link: 'https://nova.arbiscan.io'
-  },
-  {
-    title: 'Arbitrum Goerli',
-    link: 'https://goerli.arbiscan.io'
-  }
-])
-
-const chartsStatsMenuProps = toHeaderMenuProps([
-  {
-    title: 'How much gas am I saving?',
-    link: 'https://gas.arbitrum.io'
-  },
-  {
-    title: 'What’s up with my retryable?',
-    link: 'https://retryable-tx-panel.arbitrum.io'
-  },
-  {
-    title: 'How popular is Arbitrum?',
-    link: 'https://dune.com/Henrystats/arbitrum-metrics'
-  },
-  {
-    title: 'Which L2 do people trust most?',
-    link: 'https://l2beat.com'
-  }
-])
-
 const MenuIcon = {
   Open: function () {
     return (
@@ -173,7 +124,7 @@ function HeaderImageElement({ ...props }: ImageProps) {
     <Image
       id="header-image"
       src={props.src}
-      alt={props.alt || 'Arbitrum logo'}
+      alt={props.alt || 'Logo'}
       className={twMerge('-ml-2 w-40 lg:ml-0', props.className || '')}
     />
   )
@@ -225,22 +176,33 @@ export function Header() {
     <header id="header" className={defaultHeaderClassName}>
       <div className="flex w-full max-w-[1440px] justify-between px-8">
         <div className="flex items-center lg:space-x-2 xl:space-x-12">
-          <a href="/" className="arb-hover flex flex-col items-center">
-            <HeaderImageElement
-              src={HeaderLogoMainnetSVG}
-              alt="EcoBlock logo"
-            />
+          <a
+            href="/"
+            className="arb-hover flex flex-col items-center"
+            style={{ color: '#fff', fontWeight: 700, fontSize: '30px' }}
+          >
+            {/*<HeaderImageElement*/}
+            {/*  src={HeaderLogoMainnetSVG}*/}
+            {/*  alt="EcoBlock logo"*/}
+            {/*/>*/}
+            ECOBLOCK
           </a>
           <div className="hidden items-center lg:flex lg:space-x-2 xl:space-x-6">
-            <HeaderMenuDesktop items={ecosystemProps}>
-              Ecosystem
-            </HeaderMenuDesktop>
+            <DesktopExternalLink href="https://ecoblock.tech">
+              Homepage
+            </DesktopExternalLink>
+            <DesktopExternalLink href="https://ecoscan.io">
+              Explorer
+            </DesktopExternalLink>
+            <DesktopExternalLink href="https://docs.ecoblock.tech">
+              Docs
+            </DesktopExternalLink>
+            {/*<HeaderMenuDesktop items={ecosystemProps}>*/}
+            {/*  Ecosystem*/}
+            {/*</HeaderMenuDesktop>*/}
             {/*<HeaderMenuDesktop {...chartsStatsMenuProps}>*/}
             {/*  Charts & Stats*/}
             {/*</HeaderMenuDesktop>*/}
-            {/*<DesktopExternalLink href={GET_HELP_LINK}>*/}
-            {/*  Get Help*/}
-            {/*</DesktopExternalLink>*/}
           </div>
         </div>
         <Disclosure>
@@ -269,13 +231,13 @@ export function Header() {
           ></div>
           <div className="flex flex-row space-x-2 xl:space-x-4">
             <ExternalLink
-              href="https://discord.com/invite/ZpZuw7p"
+              href="https://discord.com/#"
               className="arb-hover h-8 w-8"
             >
               <Image src={Discord} alt="Discord" />
             </ExternalLink>
             <ExternalLink
-              href="https://twitter.com/OffchainLabs"
+              href="https://twitter.com/#"
               className="arb-hover h-8 w-8"
             >
               <Image src={Twitter} alt="Twitter" />
@@ -322,20 +284,15 @@ function HeaderMobile() {
           id="header-content-root"
           className="flex w-full flex-col-reverse items-center pt-4"
         ></div>
-        {/*<HeaderMenuMobile {...learnMenuProps}>*/}
-        {/*  <HeaderItemLogo*/}
-        {/*    src="/images/header/headerLogo_learn.svg"*/}
-        {/*    alt="Learn"*/}
-        {/*  />*/}
-        {/*  Learn*/}
-        {/*</HeaderMenuMobile>*/}
-        <HeaderMenuMobile items={ecosystemProps}>
-          <HeaderItemLogo
-            src="/images/header/headerLogo_ecosystem.svg"
-            alt="Ecosystem"
-          />
-          Ecosystem
-        </HeaderMenuMobile>
+        <MobileExternalLink href="https://ecoblock.tech">
+          Homepage
+        </MobileExternalLink>
+        <MobileExternalLink href="https://ecoscan.io">
+          Explorer
+        </MobileExternalLink>
+        <MobileExternalLink href="https://docs.ecoblock.tech">
+          Docs
+        </MobileExternalLink>
         {/*<HeaderMenuMobile {...explorersMenuProps}>*/}
         {/*  <HeaderItemLogo*/}
         {/*    src="/images/header/headerLogo_explorers.svg"*/}
@@ -343,20 +300,6 @@ function HeaderMobile() {
         {/*  />*/}
         {/*  Explorers*/}
         {/*</HeaderMenuMobile>*/}
-        {/*<HeaderMenuMobile {...chartsStatsMenuProps}>*/}
-        {/*  <HeaderItemLogo*/}
-        {/*    src="/images/header/headerLogo_chartsAndStats.svg"*/}
-        {/*    alt="Charts and Stats"*/}
-        {/*  />*/}
-        {/*  Charts & Stats*/}
-        {/*</HeaderMenuMobile>*/}
-        {/*<MobileExternalLink href={GET_HELP_LINK}>*/}
-        {/*  <HeaderItemLogo*/}
-        {/*    src="/images/header/headerLogo_help.svg"*/}
-        {/*    alt="Get Help"*/}
-        {/*  />*/}
-        {/*  Get Help*/}
-        {/*</MobileExternalLink>*/}
       </div>
     </div>
   )

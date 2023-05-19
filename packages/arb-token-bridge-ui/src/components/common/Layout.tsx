@@ -30,8 +30,8 @@ export const DAOBanner = () => {
   return (
     <div className="bg-gradient px-4 py-4 text-center text-white">
       <span>
-        Arbitrum One and Arbitrum Nova are now under decentralized governance.
-        Learn more about Arbitrum DAO{' '}
+        EcoBlock is now under decentralized governance. Learn more about
+        EcoBlock DAO{' '}
         <ExternalLink
           href="https://arbitrum.foundation"
           className="arb-hover underline"

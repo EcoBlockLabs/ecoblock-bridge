@@ -16,10 +16,7 @@ const networkButtonsStyles: {
   [ChainId.Mainnet]: {
     btnThemeClass: 'bg-blue-arbitrum'
   },
-  [ChainId.ArbitrumOne]: {
-    btnThemeClass: 'bg-blue-arbitrum'
-  },
-  [ChainId.ArbitrumNova]: {
+  [ChainId.EcoBlock]: {
     btnThemeClass: 'bg-brick-dark'
   }
 }

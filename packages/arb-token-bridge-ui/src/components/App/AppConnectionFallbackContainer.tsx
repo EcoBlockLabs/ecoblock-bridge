@@ -24,9 +24,7 @@ export function AppConnectionFallbackContainer({
         }`}
       >
         {children}
-        <ExternalLink href="https://metamask.io/download">
-          <Image {...imgProps} />
-        </ExternalLink>
+        <Image {...imgProps} />
       </div>
     </div>
   )
