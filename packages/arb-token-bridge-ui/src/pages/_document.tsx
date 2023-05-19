@@ -11,7 +11,7 @@ export default function Document() {
         <meta name="theme-color" content="#000000" />
         <meta
           name="description"
-          content="Built to scale Ethereum, Arbitrum brings you 10x lower costs while inheriting Ethereum’s security model. Arbitrum is a Layer 2 Optimistic Rollup."
+          content="Built to scale Ethereum, EcoBlock brings you 10x lower costs while inheriting Ethereum’s security model. EcoBlock is a Layer 2 Optimistic Rollup."
         />
 
         {/* Fathom Analytics */}

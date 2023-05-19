@@ -78,7 +78,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Bridge to Arbitrum</title>
+        <title>Bridge to EcoBlock</title>
       </Head>
       <Layout>
         <Component {...pageProps} />

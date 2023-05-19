@@ -29,18 +29,14 @@ function toHeaderMenuProps(
   }
 }
 
-const ecosystemProps = [
+const explorersProps = [
   {
-    title: 'Homepage',
-    anchorProps: { href: 'https://ecoblock.tech' }
-  },
-  {
-    title: 'Documents',
-    anchorProps: { href: 'https://docs.ecoblock.tech' }
-  },
-  {
-    title: 'Block Explorer',
+    title: 'Block Explorer Mainnet',
     anchorProps: { href: 'https://ecoscan.io' }
+  },
+  {
+    title: 'Block Explorer Testnet',
+    anchorProps: { href: 'https://testnet.ecoscan.io' }
   }
 ]
 
@@ -191,9 +187,9 @@ export function Header() {
             <DesktopExternalLink href="https://ecoblock.tech">
               Homepage
             </DesktopExternalLink>
-            <DesktopExternalLink href="https://ecoscan.io">
-              Explorer
-            </DesktopExternalLink>
+            <HeaderMenuDesktop items={explorersProps}>
+              Explorers
+            </HeaderMenuDesktop>
             <DesktopExternalLink href="https://docs.ecoblock.tech">
               Docs
             </DesktopExternalLink>
@@ -287,9 +283,7 @@ function HeaderMobile() {
         <MobileExternalLink href="https://ecoblock.tech">
           Homepage
         </MobileExternalLink>
-        <MobileExternalLink href="https://ecoscan.io">
-          Explorer
-        </MobileExternalLink>
+        <HeaderMenuMobile items={explorersProps}>Explorers</HeaderMenuMobile>
         <MobileExternalLink href="https://docs.ecoblock.tech">
           Docs
         </MobileExternalLink>

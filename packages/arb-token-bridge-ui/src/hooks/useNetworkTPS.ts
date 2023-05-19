@@ -26,7 +26,7 @@ const fetchNetworkTPS = async (l2ChainId: number) => {
   const html = response.data
   const $ = load(html)
   const tpsElement = $(
-    'span[title="Transactions per Second - Adjusted for Arbitrum Nitro system txs"]'
+    'span[title="Transactions per Second - Adjusted for EcoBlock system txs"]'
   )
   const tps = (tpsElement?.text() || '')
     .trim()

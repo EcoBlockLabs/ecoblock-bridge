@@ -35,7 +35,7 @@ export function WelcomeDialog(props: UseDialogProps) {
           <div>
             <Image
               src="/images/arbinaut-flying.webp"
-              alt="An Astronaut in an Arbitrum space suit"
+              alt="An Astronaut in an EcoBlock space suit"
               className="w-64"
               width={256}
               height={383}
@@ -48,7 +48,7 @@ export function WelcomeDialog(props: UseDialogProps) {
               </p>
 
               <p className="font-light">
-                Arbitrum is in beta – we’ve got some extra controls in place to
+                EcoBlock is in beta – we’ve got some extra controls in place to
                 protect you.{' '}
                 <ExternalLink
                   href="https://developer.offchainlabs.com/docs/mainnet#some-words-of-caution"

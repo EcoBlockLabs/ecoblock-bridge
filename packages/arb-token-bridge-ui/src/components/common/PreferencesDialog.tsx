@@ -66,7 +66,7 @@ export const PreferencesDialog = () => {
 
           <Switch
             label="Show Network Stats"
-            description="Show live, nerdy stats about Ethereum and Arbitrum chains, like
+            description="Show live, nerdy stats about Ethereum and EcoBlock chains, like
         block number and current gas price."
             checked={!!isArbitrumStatsVisible}
             onChange={
