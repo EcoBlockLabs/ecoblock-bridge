@@ -67,7 +67,9 @@ export function TokenButton(): JSX.Element {
       )}
 
       <Popover className="h-full">
+        {/*TODO reenable when erc20 token bridge is ready*/}
         <Popover.Button
+          disabled={true}
           className="arb-hover h-full w-max rounded-bl-xl rounded-tl-xl bg-white px-3 hover:bg-gray-2"
           aria-label="Select Token"
         >
@@ -85,7 +87,8 @@ export function TokenButton(): JSX.Element {
             <span className="text-xl font-light sm:text-3xl">
               {selectedToken ? selectedToken.symbol : 'ETH'}
             </span>
-            <ChevronDownIcon className="h-4 w-4 text-gray-9" />
+            {/*TODO reenable when erc20 token bridge is ready*/}
+            {/*<ChevronDownIcon className="h-4 w-4 text-gray-9" />*/}
           </div>
         </Popover.Button>
         <Popover.Panel className="absolute left-0 top-0 z-50 w-full rounded-lg bg-white px-6 py-4 shadow-[0px_4px_12px_#9e9e9e] lg:left-auto lg:top-auto lg:h-auto lg:w-[466px] lg:p-6">
