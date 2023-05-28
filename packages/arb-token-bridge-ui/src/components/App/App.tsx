@@ -78,16 +78,16 @@ const AppContent = (): JSX.Element => {
     const className = isTestnet ? 'lg:bg-blue-arbitrum' : 'lg:bg-black'
 
     if (isSepolia) {
-      return { imageSrc: 'images/HeaderArbitrumLogoGoerli.webp', className }
+      return { imageSrc: 'images/HeaderEcoBlockLogoMainnet.svg', className }
     }
 
-    return { imageSrc: 'images/HeaderArbitrumLogoMainnet.svg', className }
+    return { imageSrc: 'images/HeaderEcoBlockLogoMainnet.svg', className }
   }, [chain])
 
   if (connectionState === ConnectionState.SEQUENCER_UPDATE) {
     return (
       <Alert type="red">
-        Note: The Arbitrum Sequencer Will be offline today 3pm-5pm EST for
+        Note: The EcoBlock Sequencer Will be offline today 3pm-5pm EST for
         maintenance. Thanks for your patience!
       </Alert>
     )

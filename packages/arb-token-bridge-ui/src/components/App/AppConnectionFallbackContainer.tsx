@@ -1,13 +1,13 @@
 import Image, { ImageProps } from 'next/image'
-import ThreeArbinautsImg from '@/images/three-arbinauts.webp'
+import EcoBlockIntroImg from '@/images/ecoblock-intro.png'
 import { ExternalLink } from '../common/ExternalLink'
 
 export function AppConnectionFallbackContainer({
   layout = 'col',
   imgProps = {
     className: 'sm:w-[420px]',
-    src: ThreeArbinautsImg,
-    alt: 'Three Arbinauts',
+    src: EcoBlockIntroImg,
+    alt: 'EcoBlock Intro Image',
     priority: true
   },
   children

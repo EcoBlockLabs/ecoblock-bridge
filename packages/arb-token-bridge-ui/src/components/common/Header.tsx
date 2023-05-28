@@ -4,7 +4,7 @@ import { Disclosure } from '@headlessui/react'
 import { twMerge } from 'tailwind-merge'
 import Image, { ImageProps } from 'next/image'
 
-import HeaderLogoMainnetSVG from '@/images/HeaderArbitrumLogoMainnet.svg'
+import HeaderLogoMainnetSVG from '@/images/HeaderEcoBlockLogoMainnet.svg'
 import Discord from '@/icons/discord.webp'
 import Twitter from '@/icons/twitter.webp'
 import { Transition } from './Transition'
@@ -177,11 +177,10 @@ export function Header() {
             className="arb-hover flex flex-col items-center"
             style={{ color: '#fff', fontWeight: 700, fontSize: '30px' }}
           >
-            {/*<HeaderImageElement*/}
-            {/*  src={HeaderLogoMainnetSVG}*/}
-            {/*  alt="EcoBlock logo"*/}
-            {/*/>*/}
-            ECOBLOCK
+            <HeaderImageElement
+              src={HeaderLogoMainnetSVG}
+              alt="EcoBlock logo"
+            />
           </a>
           <div className="hidden items-center lg:flex lg:space-x-2 xl:space-x-6">
             <DesktopExternalLink href="https://ecoblock.tech">

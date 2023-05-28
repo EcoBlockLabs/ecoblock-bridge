@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         <meta charSet="utf-8" />
 
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/logo.png?v=1" />
 
         <meta name="theme-color" content="#000000" />
         <meta
