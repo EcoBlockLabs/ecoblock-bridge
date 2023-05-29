@@ -5,7 +5,7 @@ import { ExternalLink } from '../common/ExternalLink'
 export function AppConnectionFallbackContainer({
   layout = 'col',
   imgProps = {
-    className: 'sm:w-[420px]',
+    // className: 'sm:w-[420px]',
     src: EcoBlockIntroImg,
     alt: 'EcoBlock Intro Image',
     priority: true
