@@ -8,7 +8,8 @@ export function AppConnectionFallbackContainer({
     // className: 'sm:w-[420px]',
     src: EcoBlockIntroImg,
     alt: 'EcoBlock Intro Image',
-    priority: true
+    priority: true,
+    style: { mixBlendMode: 'screen' }
   },
   children
 }: {
