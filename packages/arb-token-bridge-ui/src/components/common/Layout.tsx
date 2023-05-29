@@ -50,7 +50,7 @@ export type LayoutProps = {
 export function Layout(props: LayoutProps) {
   return (
     <div
-      style={{ backgroundImage: 'url(/images/space.webp)' }}
+      style={{ backgroundImage: 'url(/images/bg.png)' }}
       className="background-image relative flex min-h-screen flex-col overflow-hidden bg-repeat"
     >
       {/*<DAOBanner />*/}
