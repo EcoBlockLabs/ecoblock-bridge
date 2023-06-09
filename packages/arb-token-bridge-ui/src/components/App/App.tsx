@@ -74,13 +74,7 @@ const AppContent = (): JSX.Element => {
   } = useAppState()
 
   const headerOverridesProps: HeaderOverridesProps = useMemo(() => {
-    const { isTestnet, isSepolia } = isNetwork(chain?.id ?? 0)
     const className = 'lg:bg-black'
-
-    if (isSepolia) {
-      return { imageSrc: 'images/HeaderEcoBlockLogoMainnet.svg', className }
-    }
-
     return { imageSrc: 'images/HeaderEcoBlockLogoMainnet.svg', className }
   }, [chain])
 

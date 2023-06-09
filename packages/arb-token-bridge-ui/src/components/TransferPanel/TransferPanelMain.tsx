@@ -116,7 +116,7 @@ function NetworkListbox({
       onChange={onChange}
     >
       <Listbox.Button
-        className={`arb-hover flex w-max items-center space-x-1 rounded-full px-3 py-2 text-sm text-white md:text-2xl lg:px-4 lg:py-3 ${buttonClassName}`}
+        className={`arb-hover flex w-max items-center space-x-1 rounded-full px-3 py-2 text-sm text-white md:text-lg lg:px-4 lg:py-3 ${buttonClassName}`}
       >
         <span>
           {label} {getNetworkName(value.chainID)}
@@ -277,7 +277,7 @@ function TokenBalance({
 
 function BalancesContainer({ children }: { children: React.ReactNode }) {
   return (
-    <div className="ml-1 flex flex-col flex-nowrap items-start break-all text-sm font-extralight tracking-[.25px] text-white md:items-end md:text-lg lg:font-medium lg:uppercase">
+    <div className="text-md ml-1 flex flex-col flex-nowrap items-start break-all font-extralight font-medium uppercase tracking-[.25px] text-white md:items-end">
       {children}
     </div>
   )

@@ -18,6 +18,7 @@ const GOERLI_INFURA_RPC_URL = `https://goerli.infura.io/v3/${INFURA_KEY}`
 export enum ChainId {
   // L1
   Mainnet = 1,
+  BscMainnet = 56,
   // L1 Testnets
   /**
    * Rinkeby is deprecated, but we are keeping it in order to detect it and point to Goerli instead.
@@ -26,12 +27,13 @@ export enum ChainId {
   Goerli = 5,
   Local = 1337,
   Sepolia = 11155111,
+  BscTestnet = 97,
   // L2
-  EcoBlock = 620,
+  EcoBlock = 630,
   ArbitrumOne = 42161,
   ArbitrumNova = 42170,
   // L2 Testnets
-  EcoBlockSepolia = 621,
+  EcoBlockTestnet = 631,
   /**
    * Arbitrum Rinkeby is deprecated, but we are keeping it in order to detect it and point to Arbitrum Goerli instead.
    */
@@ -46,6 +48,10 @@ export const rpcURLs: { [chainId: number]: string } = {
     env: process.env.NEXT_PUBLIC_ETHEREUM_RPC_URL,
     fallback: MAINNET_INFURA_RPC_URL
   }),
+  [ChainId.BscMainnet]: loadEnvironmentVariableWithFallback({
+    env: process.env.NEXT_PUBLIC_BSC_MAINNET_RPC_URL,
+    fallback: MAINNET_INFURA_RPC_URL
+  }),
   // L1 Testnets
   [ChainId.Goerli]: loadEnvironmentVariableWithFallback({
     env: process.env.NEXT_PUBLIC_GOERLI_RPC_URL,
@@ -55,33 +61,39 @@ export const rpcURLs: { [chainId: number]: string } = {
     env: process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL,
     fallback: GOERLI_INFURA_RPC_URL
   }),
+  [ChainId.BscTestnet]: loadEnvironmentVariableWithFallback({
+    env: process.env.NEXT_PUBLIC_BSC_TESTNET_RPC_URL,
+    fallback: GOERLI_INFURA_RPC_URL
+  }),
   // L2
   [ChainId.EcoBlock]: 'https://rpc.ecoblock.tech',
   [ChainId.ArbitrumOne]: 'https://arb1.arbitrum.io/rpc',
   [ChainId.ArbitrumNova]: 'https://nova.arbitrum.io/rpc',
   // L2 Testnets
-  [ChainId.EcoBlockSepolia]: 'https://rpc-testnet.ecoblock.tech',
+  [ChainId.EcoBlockTestnet]: 'https://rpc-testnet.ecoblock.tech',
   [ChainId.ArbitrumGoerli]: 'https://goerli-rollup.arbitrum.io/rpc'
 }
 
 export const explorerUrls: { [chainId: number]: string } = {
   // L1
   [ChainId.Mainnet]: 'https://etherscan.io',
+  [ChainId.BscMainnet]: 'https://bscscan.com',
   // L1 Testnets
   [ChainId.Goerli]: 'https://goerli.etherscan.io',
-  [ChainId.Sepolia]: 'https://sepolia.etherscan.io/',
+  [ChainId.Sepolia]: 'https://sepolia.etherscan.io',
+  [ChainId.BscTestnet]: 'https://testnet.bscscan.com',
   // L2
   [ChainId.EcoBlock]: 'https://ecoscan.io',
   [ChainId.ArbitrumNova]: 'https://nova.arbiscan.io',
   [ChainId.ArbitrumOne]: 'https://arbiscan.io',
   // L2 Testnets
-  [ChainId.EcoBlockSepolia]: 'https://testnet.ecoscan.io',
+  [ChainId.EcoBlockTestnet]: 'https://testnet.ecoscan.io',
   [ChainId.ArbitrumGoerli]: 'https://goerli.arbiscan.io'
 }
 
 export const getExplorerUrl = (chainId: ChainId) => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  return explorerUrls[chainId] ?? explorerUrls[ChainId.Mainnet]! //defaults to etherscan, can never be null
+  return explorerUrls[chainId] ?? explorerUrls[ChainId.BscMainnet]! //defaults to etherscan, can never be null
 }
 
 export const getBlockTime = (chainId: ChainId) => {
@@ -118,15 +130,15 @@ export const l2LptGatewayAddresses: { [chainId: number]: string } = {
 // Default L2 Chain to use for a certain chainId
 export const chainIdToDefaultL2ChainId: { [chainId: number]: ChainId[] } = {
   // L1
-  [ChainId.Mainnet]: [ChainId.EcoBlock],
+  [ChainId.BscMainnet]: [ChainId.EcoBlock],
   // L1 Testnets
-  [ChainId.Sepolia]: [ChainId.EcoBlockSepolia],
+  [ChainId.BscTestnet]: [ChainId.EcoBlockTestnet],
 
   // L2
   [ChainId.EcoBlock]: [ChainId.EcoBlock],
 
   // L2 Testnets
-  [ChainId.EcoBlockSepolia]: [ChainId.EcoBlockSepolia]
+  [ChainId.EcoBlockTestnet]: [ChainId.EcoBlockTestnet]
 }
 
 const defaultL1Network: L1Network = {
@@ -236,27 +248,29 @@ interface IsNetwork {
 }
 
 export function isNetwork(chainId: ChainId): IsNetwork {
-  const isMainnet = chainId === ChainId.Mainnet
+  const isMainnet = chainId === ChainId.BscMainnet
 
   const isRinkeby = chainId === ChainId.Rinkeby
   const isGoerli = chainId === ChainId.Goerli
   const isSepolia = chainId === ChainId.Sepolia
+  const isBscTestnet = chainId === ChainId.BscTestnet
 
   const isEcoBlock = chainId === ChainId.EcoBlock
-  const isEcoBlockSepolia = chainId === ChainId.EcoBlockSepolia
+  const isEcoBlockTestnet = chainId === ChainId.EcoBlockTestnet
 
   const isArbitrumOne = chainId === ChainId.ArbitrumOne
   const isArbitrumNova = chainId === ChainId.ArbitrumNova
   const isArbitrumGoerli = chainId === ChainId.ArbitrumGoerli
   const isArbitrumRinkeby = chainId === ChainId.ArbitrumRinkeby
 
-  const isArbitrum = isEcoBlock || isEcoBlockSepolia
+  const isArbitrum = isEcoBlock || isEcoBlockTestnet
 
-  const isEthereum = isMainnet || isSepolia
+  const isEthereum = isMainnet || isBscTestnet
 
-  const isTestnet = isSepolia || isEcoBlockSepolia
+  const isTestnet = isBscTestnet || isEcoBlockTestnet
 
-  const isSupported = isMainnet || isSepolia || isEcoBlock || isEcoBlockSepolia // is network supported on bridge
+  const isSupported =
+    isMainnet || isBscTestnet || isEcoBlock || isEcoBlockTestnet // is network supported on bridge
 
   return {
     // L1
@@ -272,7 +286,7 @@ export function isNetwork(chainId: ChainId): IsNetwork {
     isArbitrumOne,
     isArbitrumNova,
     // L2 Testnets
-    isEcoBlockSepolia,
+    isEcoBlockSepolia: isEcoBlockTestnet,
     isArbitrumRinkeby,
     isArbitrumGoerli,
     // Testnet
@@ -287,6 +301,12 @@ export function getNetworkName(chainId: number) {
     case ChainId.Mainnet:
       return 'Mainnet'
 
+    case ChainId.BscMainnet:
+      return 'Binance Smart Chain'
+
+    case ChainId.BscTestnet:
+      return 'BNB Testnet'
+
     case ChainId.Sepolia:
       return 'Sepolia Testnet'
 
@@ -296,7 +316,7 @@ export function getNetworkName(chainId: number) {
     case ChainId.EcoBlock:
       return 'EcoBlock'
 
-    case ChainId.EcoBlockSepolia:
+    case ChainId.EcoBlockTestnet:
       return 'EcoBlock Testnet'
 
     case ChainId.ArbitrumLocal:
@@ -314,10 +334,13 @@ export function getNetworkLogo(chainId: number) {
     case ChainId.Goerli:
     case ChainId.Sepolia:
       return '/images/EthereumLogo.webp'
+    case ChainId.BscMainnet:
+    case ChainId.BscTestnet:
+      return '/images/bnb-logo.svg'
 
     // L2 networks
     case ChainId.EcoBlock:
-    case ChainId.EcoBlockSepolia:
+    case ChainId.EcoBlockTestnet:
       return '/images/EcoBlockLogoSquare.svg'
 
     case ChainId.ArbitrumOne:
@@ -334,8 +357,8 @@ export function getNetworkLogo(chainId: number) {
 
 export function getSupportedNetworks(chainId = 0) {
   return isNetwork(chainId).isTestnet
-    ? [ChainId.Sepolia, ChainId.EcoBlockSepolia]
-    : [ChainId.Mainnet, ChainId.EcoBlock]
+    ? [ChainId.BscTestnet, ChainId.EcoBlockTestnet]
+    : [ChainId.BscMainnet, ChainId.EcoBlock]
 }
 
 const handleSwitchNetworkNotSupported = (

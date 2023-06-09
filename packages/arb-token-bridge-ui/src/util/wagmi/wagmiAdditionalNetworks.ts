@@ -5,7 +5,7 @@ export const ecoblock: Chain = {
   id: ChainId.EcoBlock,
   name: 'EcoBlock',
   network: 'ecoblock',
-  nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+  nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 },
   rpcUrls: {
     default: {
       http: [rpcURLs[ChainId.EcoBlock]!]
@@ -20,17 +20,17 @@ export const ecoblock: Chain = {
   }
 }
 
-export const ecoblockSepolia: Chain = {
-  id: ChainId.EcoBlockSepolia,
-  name: 'EcoBlock Sepolia',
-  network: 'ecoblock-sepolia',
-  nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+export const ecoblockTestnet: Chain = {
+  id: ChainId.EcoBlockTestnet,
+  name: 'EcoBlock Testnet',
+  network: 'ecoblock-testnet',
+  nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 },
   rpcUrls: {
     default: {
-      http: [rpcURLs[ChainId.EcoBlockSepolia]!]
+      http: [rpcURLs[ChainId.EcoBlockTestnet]!]
     },
     public: {
-      http: [rpcURLs[ChainId.EcoBlockSepolia]!]
+      http: [rpcURLs[ChainId.EcoBlockTestnet]!]
     }
   },
   blockExplorers: {

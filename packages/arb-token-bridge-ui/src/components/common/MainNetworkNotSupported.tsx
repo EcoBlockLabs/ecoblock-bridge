@@ -13,7 +13,7 @@ import { Button } from './Button'
 const networkButtonsStyles: {
   [key in ChainId]?: { btnThemeClass: string }
 } = {
-  [ChainId.Mainnet]: {
+  [ChainId.BscMainnet]: {
     btnThemeClass: 'bg-blue-arbitrum'
   },
   [ChainId.EcoBlock]: {
