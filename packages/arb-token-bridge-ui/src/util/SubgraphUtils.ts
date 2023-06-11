@@ -23,9 +23,9 @@ const L1SubgraphClient = {
     }),
     cache: new InMemoryCache()
   }),
-  EcoBlockSepolia: new ApolloClient({
+  EcoBlockTestnet: new ApolloClient({
     link: new HttpLink({
-      uri: 'https://api.studio.thegraph.com/query/46786/ecoblock-testnet-bridge/v0.0.2',
+      uri: 'https://graph-node-bsc-testnet.ecoblock.tech/subgraphs/name/ecoblock-testnet-bridge',
       fetch
     }),
     cache: new InMemoryCache()
@@ -47,7 +47,7 @@ const L2SubgraphClient = {
     }),
     cache: new InMemoryCache()
   }),
-  EcoBlockSepolia: new ApolloClient({
+  EcoBlockTestnet: new ApolloClient({
     link: new HttpLink({
       uri: 'https://graph-node-testnet.ecoblock.tech/subgraphs/name/ecoblock-testnet-layer2-token-gateway',
       fetch
@@ -59,8 +59,8 @@ const L2SubgraphClient = {
 export function getL1SubgraphClient(l2ChainId: number) {
   switch (l2ChainId) {
     // TODO add ecoblock mainnet
-    case 621:
-      return L1SubgraphClient.EcoBlockSepolia
+    case 631:
+      return L1SubgraphClient.EcoBlockTestnet
 
     case 42161:
       return L1SubgraphClient.ArbitrumOne
@@ -79,8 +79,8 @@ export function getL1SubgraphClient(l2ChainId: number) {
 export function getL2SubgraphClient(l2ChainId: number) {
   switch (l2ChainId) {
     // TODO add ecoblock mainnet
-    case 621:
-      return L2SubgraphClient.EcoBlockSepolia
+    case 631:
+      return L2SubgraphClient.EcoBlockTestnet
 
     case 42161:
       return L2SubgraphClient.ArbitrumOne
