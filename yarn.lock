@@ -498,10 +498,10 @@
     chance "^1.1.4"
     core-js "^3.6.4"
 
-"@ecoblocklabs/ecojs@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@ecoblocklabs/ecojs/-/ecojs-1.0.1.tgz#10812e29755e52814e0f82f36b69e720ef56a544"
-  integrity sha512-yrPs2xKdriHuGVChYJ6be8nJEx6tLnMiXlTkSq86oBs77mF5fJKJT+78tTtxLIso5zIJrtgsKkpgKLkTHIXZ/w==
+"@ecoblocklabs/ecojs@1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@ecoblocklabs/ecojs/-/ecojs-1.0.3.tgz#4e58b63d3fad33c89864ad47ca1ec2047932c0bb"
+  integrity sha512-lIpFDS7C1EVJ+Dh/9cH0vyQQgApI9apHMV/RRA8zUHwoq12c8Xy2iXKQOee+12/EF7uMoUdf1zME5TwbXXvziw==
   dependencies:
     "@ethersproject/address" "^5.0.8"
     "@ethersproject/bignumber" "^5.1.1"
