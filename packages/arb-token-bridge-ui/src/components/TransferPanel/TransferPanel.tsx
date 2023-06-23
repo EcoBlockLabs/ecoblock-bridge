@@ -46,6 +46,7 @@ import {
 import { useIsSwitchingL2Chain } from './TransferPanelMainUtils'
 import { NonCanonicalTokensBridgeInfo } from '../../util/fastBridges'
 import { tokenRequiresApprovalOnL2 } from '../../util/L2ApprovalUtils'
+import useTranslation from 'next-translate/useTranslation'
 
 const onTxError = (error: any) => {
   if (error.code !== 'ACTION_REJECTED') {
@@ -894,7 +895,7 @@ export function TransferPanel() {
     disableDeposit,
     disableWithdrawal
   ])
-
+  const { t } = useTranslation('home')
   return (
     <>
       <TokenApprovalDialog
@@ -932,7 +933,7 @@ export function TransferPanel() {
         <div className="transfer-panel-stats flex w-full flex-col justify-between bg-gray-2 px-6 py-6 lg:rounded-br-xl lg:rounded-tr-xl lg:bg-white lg:px-0 lg:pr-6">
           <div className="flex flex-col">
             <div className="hidden lg:block">
-              <span className="text-2xl text-gray-10">Summary</span>
+              <span className="text-2xl text-gray-10">{t('summary')}</span>
               <div className="h-4" />
             </div>
 
@@ -945,7 +946,7 @@ export function TransferPanel() {
             ) : (
               <div className="hidden text-lg text-gray-7 lg:block lg:min-h-[297px]">
                 <span className="text-xl">
-                  Bridging summary will appear here.
+                  {t('bridging')}
                 </span>
               </div>
             )}
@@ -969,8 +970,8 @@ export function TransferPanel() {
               )}
             >
               {isSmartContractWallet && isTransferring
-                ? 'Sending request...'
-                : `Move funds to ${getNetworkName(l2Network.chainID)}`}
+                ? t('sending_request')
+                : `${t('move_funds_to')} ${getNetworkName(l2Network.chainID)}`}
             </Button>
           ) : (
             <Button
@@ -981,8 +982,8 @@ export function TransferPanel() {
               className="w-full bg-eth-dark py-4 text-lg lg:text-2xl"
             >
               {isSmartContractWallet && isTransferring
-                ? 'Sending request...'
-                : `Move funds to ${getNetworkName(l1Network.chainID)}`}
+                ? t('sending_request')
+                : `${t('move_funds_to')}  ${getNetworkName(l1Network.chainID)}`}
             </Button>
           )}
         </div>
@@ -1014,12 +1015,11 @@ export function TransferPanel() {
               <div className="flex flex-col">
                 <span>
                   <b>
-                    To continue, please approve tx on your smart contract
-                    wallet.
+                    {t('pls_approve')}
                   </b>
                 </span>
                 <span>
-                  If you have k of n signers, then k of n will need to sign.
+                  {t('if_you_have')}
                 </span>
               </div>
             }

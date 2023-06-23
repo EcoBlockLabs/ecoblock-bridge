@@ -8,6 +8,7 @@ import { ExternalLink } from './ExternalLink'
 import { Toast } from './atoms/Toast'
 
 import 'react-toastify/dist/ReactToastify.css'
+import useTranslation from 'next-translate/useTranslation'
 
 function Moon() {
   const { width } = useWindowSize()
@@ -27,16 +28,16 @@ function Moon() {
 }
 
 export const DAOBanner = () => {
+  const { t } = useTranslation('home')
   return (
     <div className="bg-gradient px-4 py-4 text-center text-white">
       <span>
-        EcoBlock is now under decentralized governance. Learn more about
-        EcoBlock DAO{' '}
+        {t('decentralized')}{' '}
         <ExternalLink
           href="https://arbitrum.foundation"
           className="arb-hover underline"
         >
-          here.
+          {t('here')}.
         </ExternalLink>
       </span>
     </div>

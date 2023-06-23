@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { Fragment, useEffect, useRef, useState } from 'react'
 import ReactDOM from 'react-dom'
-import { Disclosure } from '@headlessui/react'
+import { Disclosure, Menu } from '@headlessui/react'
 import { twMerge } from 'tailwind-merge'
 import Image, { ImageProps } from 'next/image'
 
@@ -15,6 +15,8 @@ import {
   HeaderMenuProps
 } from './HeaderMenu'
 import { GET_HELP_LINK } from '../../constants'
+import Languages from './SelectLanguage'
+import useTranslation from 'next-translate/useTranslation'
 
 const defaultHeaderClassName = 'z-40 flex h-[80px] justify-center lg:bg-black'
 
@@ -31,11 +33,11 @@ function toHeaderMenuProps(
 
 const explorersProps = [
   {
-    title: 'Block Explorer Mainnet',
+    title: 'block_ex_mainnet',
     anchorProps: { href: 'https://ecoscan.io' }
   },
   {
-    title: 'Block Explorer Testnet',
+    title: 'block_ex_testnet',
     anchorProps: { href: 'https://testnet.ecoscan.io' }
   }
 ]
@@ -168,6 +170,7 @@ export function HeaderContent({ children }: { children: React.ReactNode }) {
 }
 
 export function Header() {
+  const { t } = useTranslation('home')
   return (
     <header id="header" className={defaultHeaderClassName}>
       <div className="flex w-full max-w-[1440px] justify-between px-8">
@@ -184,13 +187,13 @@ export function Header() {
           </a>
           <div className="hidden items-center lg:flex lg:space-x-2 xl:space-x-6">
             <DesktopExternalLink href="https://ecoblock.tech">
-              Homepage
+              {t('home_page')}
             </DesktopExternalLink>
             <HeaderMenuDesktop items={explorersProps}>
-              Explorers
+              {t('explorers')}
             </HeaderMenuDesktop>
             <DesktopExternalLink href="https://docs.ecoblock.tech">
-              Docs
+              {t('docs')}
             </DesktopExternalLink>
             {/*<HeaderMenuDesktop items={ecosystemProps}>*/}
             {/*  Ecosystem*/}
@@ -237,6 +240,7 @@ export function Header() {
             >
               <Image src={Twitter} alt="Twitter" />
             </ExternalLink>
+            <Languages />
           </div>
         </div>
       </div>

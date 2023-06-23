@@ -5,6 +5,7 @@ import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline'
 
 import { Transition } from './Transition'
 import { ExternalLink } from './ExternalLink'
+import useTranslation from 'next-translate/useTranslation'
 
 export type HeaderMenuItem = {
   title: string
@@ -19,6 +20,7 @@ export type HeaderMenuProps = {
 export function HeaderMenuDesktop(
   props: HeaderMenuProps & { children: React.ReactNode }
 ) {
+  const { t } = useTranslation('home')
   return (
     <Popover as="div" className="relative inline-block text-left">
       <div>
@@ -44,7 +46,7 @@ export function HeaderMenuDesktop(
                     rel="noreferrer"
                     className="-mx-6 block cursor-pointer px-6 py-1 font-medium hover:bg-blue-arbitrum hover:text-white"
                   >
-                    {item.title}
+                    {t(item.title)}
                   </a>
                 )
               }
@@ -61,11 +63,12 @@ export function HeaderMenuDesktop(
                       <a
                         key={`${index}.${sIndex}`}
                         href={subitem.anchorProps?.href}
+                        onClick={subitem.anchorProps?.onClick}
                         target="_blank"
                         rel="noreferrer"
                         className="-mx-6 block py-1 pl-10 pr-6 font-light hover:bg-blue-arbitrum hover:text-white"
                       >
-                        {subitem.title}
+                        {t(subitem.title)}
                       </a>
                     ))}
                   </div>
