@@ -51,6 +51,7 @@ import { TOS_LOCALSTORAGE_KEY } from '../../constants'
 import { AppConnectionFallbackContainer } from './AppConnectionFallbackContainer'
 import FixingSpaceship from '@/images/arbinaut-fixing-spaceship.webp'
 import { appInfo, chains, wagmiClient } from '../../util/wagmi/setup'
+import useTranslation from 'next-translate/useTranslation'
 
 declare global {
   interface Window {
@@ -239,6 +240,7 @@ function NetworkReady({ children }: { children: React.ReactNode }) {
 }
 
 function ConnectionFallback(props: FallbackProps): JSX.Element {
+  const { t } = useTranslation('home')
   switch (props.status) {
     case UseNetworksAndSignersStatus.LOADING:
       return (
@@ -263,9 +265,7 @@ function ConnectionFallback(props: FallbackProps): JSX.Element {
           </HeaderContent>
 
           <AppConnectionFallbackContainer>
-            <span className="text-white">
-              Please connect your wallet to use the bridge.
-            </span>
+            <span className="text-white">{t('please_connect')}</span>
           </AppConnectionFallbackContainer>
         </>
       )
