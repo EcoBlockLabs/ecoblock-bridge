@@ -13,6 +13,7 @@ import { useWithdrawals } from '../../hooks/useWithdrawals'
 import { TransactionStatusInfo } from '../TransactionHistory/TransactionStatusInfo'
 import { ArbitrumStats, statsLocalStorageKey } from './ArbitrumStats'
 import { PreferencesDialog } from '../common/PreferencesDialog'
+import useTranslation from 'next-translate/useTranslation'
 
 export const motionDivProps = {
   layout: true,
@@ -31,6 +32,7 @@ export const motionDivProps = {
 }
 
 export function MainContent() {
+  const { t } = useTranslation('home')
   const { closeTransactionHistoryPanel } = useAppContextActions()
   const {
     layout: { isTransactionHistoryPanelVisible }
@@ -108,7 +110,7 @@ export function MainContent() {
       </div>
       <SidePanel
         isOpen={isTransactionHistoryPanelVisible}
-        heading="Transaction History"
+        heading={t('transaction_history')}
         onClose={closeTransactionHistoryPanel}
       >
         {/* Transaction history - pending transactions + history table */}

@@ -16,6 +16,7 @@ import {
 } from '../../util/networks'
 import { ExternalLink } from '../common/ExternalLink'
 import { Loader } from '../common/atoms/Loader'
+import useTranslation from 'next-translate/useTranslation'
 
 const getOtherL2NetworkChainId = (chainId: number) => {
   if (!isNetwork(chainId).isEcoBlock) {
@@ -44,6 +45,7 @@ export const PendingTransactions = ({
   })
 
   const bgClassName = 'bg-gray-10'
+  const { t } = useTranslation('home')
 
   return (
     <div
@@ -53,7 +55,7 @@ export const PendingTransactions = ({
       <div className="heading flex items-center justify-between text-base text-white lg:text-lg">
         <div className="flex flex-nowrap items-center gap-x-3 whitespace-nowrap">
           {loading && <Loader color="white" size="small" />}
-          Pending Transactions:{' '}
+          {t('pending_transactions')}:{' '}
           {`${getNetworkName(l2Network.chainID)}/${getNetworkName(
             l1Network.chainID
           )}`}
@@ -66,7 +68,7 @@ export const PendingTransactions = ({
             onClick={() => {
               switchNetwork?.(getOtherL2NetworkChainId(l2Network.chainID))
             }}
-          >{`See ${getNetworkName(
+          >{`${t('see')} ${getNetworkName(
             getOtherL2NetworkChainId(l2Network.chainID)
           )}`}</ExternalLink>
         )}
@@ -76,14 +78,14 @@ export const PendingTransactions = ({
       {error && (
         <span className="flex gap-x-2 text-sm text-red-400">
           <InformationCircleIcon className="h-5 w-5" aria-hidden="true" />
-          Failed to load pending transactions, please try refreshing the page
+          {t('failed_to_load')}
         </span>
       )}
 
       {/* No pending transactions */}
       {!error && !loading && !transactions.length && (
         <span className="flex gap-x-2 text-sm text-white opacity-40">
-          No pending transactions
+          {t('no_pending_transactions')}
         </span>
       )}
 

@@ -5,12 +5,14 @@ import { statsLocalStorageKey } from '../MainContent/ArbitrumStats'
 import { Radio } from './atoms/Radio'
 import { Switch } from './atoms/Switch'
 import { SidePanel } from './SidePanel'
+import useTranslation from 'next-translate/useTranslation'
 
 const SectionTitle = ({ children }: { children: React.ReactNode }) => (
   <div className="heading mb-4 text-lg">{children}</div>
 )
 
 export const PreferencesDialog = () => {
+  const { t } = useTranslation('home')
   const {
     layout: { isPreferencesPanelVisible }
   } = useAppContextState()
@@ -35,7 +37,7 @@ export const PreferencesDialog = () => {
   return (
     <SidePanel
       isOpen={isPreferencesPanelVisible}
-      heading="Preferences"
+      heading={t('preferences')}
       onClose={closePreferences}
       panelClassNameOverrides="lg:!w-[600px] !min-w-[350px]" // custom width
     >
@@ -62,12 +64,11 @@ export const PreferencesDialog = () => {
 
         {/* Arbitrum stats toggle */}
         <div className="w-full">
-          <SectionTitle>Stats</SectionTitle>
+          <SectionTitle>{t('stats')}</SectionTitle>
 
           <Switch
             label="Show Network Stats"
-            description="Show live, nerdy stats about Ethereum and EcoBlock chains, like
-        block number and current gas price."
+            description={t('show_live')}
             checked={!!isArbitrumStatsVisible}
             onChange={
               isArbitrumStatsVisible ? closeArbitrumStats : openArbitrumStats
