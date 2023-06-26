@@ -12,6 +12,7 @@ import { formatAmount, formatUSD } from '../../util/NumberUtils'
 import { isNetwork } from '../../util/networks'
 import { useNetworksAndSigners } from '../../hooks/useNetworksAndSigners'
 import { tokenRequiresApprovalOnL2 } from '../../util/L2ApprovalUtils'
+import useTranslation from 'next-translate/useTranslation'
 
 export type GasEstimationStatus = 'idle' | 'loading' | 'success' | 'error'
 
@@ -242,6 +243,8 @@ export function TransferPanelSummary({
   const { app } = useAppState()
   const { ethToUSD } = useETHPrice()
   const { l1 } = useNetworksAndSigners()
+  const { t } = useTranslation('home')
+
 
   const { isMainnet } = isNetwork(l1.network.chainID)
 
@@ -276,7 +279,7 @@ export function TransferPanelSummary({
   return (
     <TransferPanelSummaryContainer>
       <div className="flex flex-row justify-between text-sm text-gray-10 lg:text-base">
-        <span className="w-2/5 font-light">You’re moving</span>
+        <span className="w-2/5 font-light">{t('you_moving')}</span>
         <div className="flex w-3/5 flex-row justify-between">
           <span>
             {formatAmount(amount, { symbol: token?.symbol || 'ETH' })}
@@ -291,7 +294,7 @@ export function TransferPanelSummary({
       </div>
 
       <div className="flex flex-row items-center justify-between text-sm text-gray-10 lg:text-base">
-        <span className="w-2/5 font-light">You’ll pay in gas fees</span>
+        <span className="w-2/5 font-light">{t('pay_gas_fees')}</span>
         <div className="flex w-3/5 justify-between">
           <span>
             {formatAmount(estimatedTotalGasFees, {
@@ -309,7 +312,7 @@ export function TransferPanelSummary({
       <div className="flex flex-col space-y-2 text-sm text-gray-9 lg:text-base">
         <div className="flex flex-row justify-between">
           <div className="flex flex-row items-center space-x-2">
-            <span className="pl-4 font-light">L1 gas</span>
+            <span className="pl-4 font-light">{t('l1_gas')}</span>
             <Tooltip content="L1 fees go to Ethereum Validators.">
               <InformationCircleIcon className="h-4 w-4" />
             </Tooltip>
@@ -329,7 +332,7 @@ export function TransferPanelSummary({
         </div>
         <div className="flex flex-row justify-between text-gray-9">
           <div className="flex flex-row items-center space-x-2">
-            <span className="pl-4 font-light ">L2 gas</span>
+            <span className="pl-4 font-light ">{t('l2_gas')}</span>
             <Tooltip content="L2 fees go to L2 validators to track chain state and execute transactions. This is actually an estimated fee. If the true fee is lower, you will be refunded.">
               <InformationCircleIcon className="h-4 w-4 " />
             </Tooltip>
@@ -357,7 +360,9 @@ export function TransferPanelSummary({
             <div className="h-2" />
           </div>
           <div className="flex flex-row justify-between text-sm text-gray-10 lg:text-base">
-            <span className="w-2/5 font-light text-gray-9">Total amount</span>
+            <span className="w-2/5 font-light text-gray-9">
+              {t('total_amount')}
+            </span>
             <div className="flex w-3/5 flex-row justify-between">
               <span>
                 {formatAmount(amount + estimatedTotalGasFees, {

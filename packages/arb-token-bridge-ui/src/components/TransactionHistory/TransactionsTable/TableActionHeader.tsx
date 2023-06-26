@@ -7,6 +7,7 @@ import {
 import { TransactionsTableProps } from './TransactionsTable'
 import { useDebouncedValue } from '../../../hooks/useDebouncedValue'
 import { Loader } from '../../common/atoms/Loader'
+import useTranslation from 'next-translate/useTranslation'
 
 type TableActionHeaderProps = Omit<
   TransactionsTableProps,
@@ -70,7 +71,7 @@ export const TableActionHeader = ({
 
   const showDebounceLoader =
     (searchString && loading) || pageParams.searchString !== trimmedSearchString // for immediate UX feedback of search results fetching while typing
-
+  const { t } = useTranslation('home')
   return (
     <div
       className={`sticky left-0 top-0 flex w-auto flex-nowrap items-center justify-between gap-4 rounded-tr-lg bg-white p-3 text-sm ${
@@ -83,7 +84,7 @@ export const TableActionHeader = ({
         <input
           className="text-normal h-full w-full p-2 font-light placeholder:text-gray-9"
           type="text"
-          placeholder={`Search for a full or partial ${layerType} tx ID`}
+          placeholder={`${t('search_full_partial')} ${layerType} tx ID`}
           value={searchString}
           onChange={e => {
             setSearchString(e.target.value)

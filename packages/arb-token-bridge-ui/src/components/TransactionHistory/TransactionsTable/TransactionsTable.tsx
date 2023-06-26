@@ -15,6 +15,7 @@ import { TableBodyLoading } from './TableBodyLoading'
 import { TableBodyError } from './TableBodyError'
 import { TableActionHeader } from './TableActionHeader'
 import { useAppState } from '../../../state'
+import useTranslation from 'next-translate/useTranslation'
 
 export type PageParams = {
   searchString: string
@@ -86,6 +87,7 @@ export function TransactionsTable({
   error
 }: TransactionsTableProps) {
   const { isSmartContractWallet } = useNetworksAndSigners()
+  const { t } = useTranslation('home')
 
   const {
     app: { mergedTransactions: locallyStoredTransactions }
@@ -175,10 +177,10 @@ export function TransactionsTable({
         <table className="w-full overflow-hidden  rounded-b-lg bg-white">
           <thead className="text-left text-sm text-gray-10">
             <tr>
-              <th className="py-3 pl-6 pr-3 font-normal">Status</th>
-              <th className="px-3 py-3 font-normal">Time</th>
-              <th className="px-3 py-3 font-normal">Amount</th>
-              <th className="px-3 py-3 font-normal">TxID</th>
+              <th className="py-3 pl-6 pr-3 font-normal">{t('status')}</th>
+              <th className="px-3 py-3 font-normal">{t('time')}</th>
+              <th className="px-3 py-3 font-normal">{t('amount')}</th>
+              <th className="px-3 py-3 font-normal">{t('txid')}</th>
               <th className="py-3 pl-3 pr-6 font-normal">
                 {/* Empty header text */}
               </th>
@@ -202,8 +204,8 @@ export function TransactionsTable({
                 <EmptyTableRow>
                   <span className="text-sm font-medium">
                     {isSmartContractWallet
-                      ? 'You can see tx history in your smart contract wallet'
-                      : 'No transactions'}
+                      ? t('can_see_wallet')
+                      : t('no_transactions')}
                   </span>
                 </EmptyTableRow>
               )}
