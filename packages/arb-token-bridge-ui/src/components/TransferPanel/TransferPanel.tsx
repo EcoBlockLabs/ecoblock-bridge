@@ -945,9 +945,7 @@ export function TransferPanel() {
               />
             ) : (
               <div className="hidden text-lg text-gray-7 lg:block lg:min-h-[297px]">
-                <span className="text-xl">
-                  {t('bridging')}
-                </span>
+                <span className="text-xl">{t('bridging')}</span>
               </div>
             )}
           </div>
@@ -1014,13 +1012,9 @@ export function TransferPanel() {
             content={
               <div className="flex flex-col">
                 <span>
-                  <b>
-                    {t('pls_approve')}
-                  </b>
+                  <b>{t('pls_approve')}</b>
                 </span>
-                <span>
-                  {t('if_you_have')}
-                </span>
+                <span>{t('if_you_have')}</span>
               </div>
             }
           >

@@ -245,7 +245,6 @@ export function TransferPanelSummary({
   const { l1 } = useNetworksAndSigners()
   const { t } = useTranslation('home')
 
-
   const { isMainnet } = isNetwork(l1.network.chainID)
 
   if (status === 'loading') {

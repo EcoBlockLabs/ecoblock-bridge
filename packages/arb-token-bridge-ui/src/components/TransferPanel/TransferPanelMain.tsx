@@ -830,11 +830,11 @@ export function TransferPanelMain({
                 <TokenBalance
                   on={app.isDepositMode ? NetworkType.l2 : NetworkType.l1}
                   forToken={selectedToken}
-                  prefix={selectedToken ? `${t('balance') }` : ''}
+                  prefix={selectedToken ? `${t('balance')}` : ''}
                 />
                 <ETHBalance
                   on={app.isDepositMode ? NetworkType.l2 : NetworkType.l1}
-                  prefix={selectedToken ? '' : `${t('balance') }`}
+                  prefix={selectedToken ? '' : `${t('balance')}`}
                 />
               </>
             )}
@@ -900,8 +900,8 @@ export function TransferPanelMain({
         className="md:max-w-[628px]"
       >
         <p>
-          {t('the_arbitrum')} {selectedToken?.symbol}
-          , {t('please_ask_the')} {selectedToken?.symbol} {t('team_for_more_info')}
+          {t('the_arbitrum')} {selectedToken?.symbol}, {t('please_ask_the')}{' '}
+          {selectedToken?.symbol} {t('team_for_more_info')}
         </p>
       </Dialog>
     </div>

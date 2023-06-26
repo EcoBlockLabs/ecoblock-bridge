@@ -8,7 +8,7 @@ import { Button } from '../common/Button'
 import { ExternalLink } from '../common/ExternalLink'
 import { Dialog, UseDialogProps } from '../common/Dialog'
 import { errorToast } from '../common/atoms/Toast'
-import useTranslation from 'next-translate/useTranslation';
+import useTranslation from 'next-translate/useTranslation'
 
 export function WelcomeDialog(props: UseDialogProps) {
   const { t } = useTranslation('home')
