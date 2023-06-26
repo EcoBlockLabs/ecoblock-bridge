@@ -1,5 +1,5 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import nextTranslate from 'next-translate-plugin'
+// eslint-disable-next-line import/no-extraneous-dependencies,@typescript-eslint/no-var-requires
+const nextTranslate = require('next-translate-plugin')
 
 // @ts-check type next.config.js
 
@@ -7,7 +7,7 @@ import nextTranslate from 'next-translate-plugin'
  * @type {import('next').NextConfig}
  **/
 
-export default nextTranslate({
+module.exports = nextTranslate({
   distDir: 'build',
   productionBrowserSourceMaps: true,
   reactStrictMode: true
