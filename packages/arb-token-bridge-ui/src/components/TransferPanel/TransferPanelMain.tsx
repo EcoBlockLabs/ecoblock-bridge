@@ -43,6 +43,7 @@ import {
 } from './TransferPanelMainUtils'
 import { NetworkType, useTokenBalances } from './useTokenBalances'
 import { isUserRejectedError } from '../../util/isUserRejectedError'
+import useTranslation from 'next-translate/useTranslation'
 
 export function SwitchNetworksButton(
   props: React.ButtonHTMLAttributes<HTMLButtonElement>
@@ -755,12 +756,13 @@ export function TransferPanelMain({
     switchNetworksOnTransferPanel,
     isConnectedToArbitrum
   ])
+  const { t } = useTranslation('home')
 
   return (
     <div className="flex flex-col px-6 py-6 lg:min-w-[540px] lg:px-0 lg:pl-6">
       <NetworkContainer network={from}>
         <NetworkListboxPlusBalancesContainer>
-          <NetworkListbox label="From:" {...networkListboxProps.from} />
+          <NetworkListbox label={t('from')} {...networkListboxProps.from} />
           <BalancesContainer>
             {isSwitchingL2Chain ? (
               <StyledLoader />
@@ -769,11 +771,11 @@ export function TransferPanelMain({
                 <TokenBalance
                   on={app.isDepositMode ? NetworkType.l1 : NetworkType.l2}
                   forToken={selectedToken}
-                  prefix={selectedToken ? 'Balance: ' : ''}
+                  prefix={selectedToken ? t('balance') : ''}
                 />
                 <ETHBalance
                   on={app.isDepositMode ? NetworkType.l1 : NetworkType.l2}
-                  prefix={selectedToken ? '' : 'Balance: '}
+                  prefix={selectedToken ? '' : t('balance')}
                 />
               </>
             )}
@@ -797,14 +799,13 @@ export function TransferPanelMain({
 
           {isDepositMode && selectedToken && (
             <p className="mt-1 text-xs font-light text-white">
-              Make sure you have ETH in your L2 wallet, you’ll need it to power
-              transactions.
+              {t('make')}
               <br />
               <ExternalLink
                 href="https://consensys.zendesk.com/hc/en-us/articles/7536324817435"
                 className="arb-hover underline"
               >
-                Learn more.
+                {t('learn_more')}
               </ExternalLink>
             </p>
           )}
@@ -820,7 +821,7 @@ export function TransferPanelMain({
 
       <NetworkContainer network={to}>
         <NetworkListboxPlusBalancesContainer>
-          <NetworkListbox label="To:" {...networkListboxProps.to} />
+          <NetworkListbox label={t('to')} {...networkListboxProps.to} />
           <BalancesContainer>
             {isSwitchingL2Chain ? (
               <StyledLoader />
@@ -829,11 +830,11 @@ export function TransferPanelMain({
                 <TokenBalance
                   on={app.isDepositMode ? NetworkType.l2 : NetworkType.l1}
                   forToken={selectedToken}
-                  prefix={selectedToken ? 'Balance: ' : ''}
+                  prefix={selectedToken ? `${t('balance') }` : ''}
                 />
                 <ETHBalance
                   on={app.isDepositMode ? NetworkType.l2 : NetworkType.l1}
-                  prefix={selectedToken ? '' : 'Balance: '}
+                  prefix={selectedToken ? '' : `${t('balance') }`}
                 />
               </>
             )}
@@ -852,7 +853,7 @@ export function TransferPanelMain({
             }
             className="flex flex-row items-center"
           >
-            <span className=" text-lg">Advanced Settings</span>
+            <span className=" text-lg">{t('advanced_settings')}</span>
             {showAdvancedSettings ? (
               <ChevronUpIcon className="ml-1 h-4 w-4" />
             ) : (
@@ -863,12 +864,12 @@ export function TransferPanelMain({
             <>
               <div className="mt-2">
                 <span className="text-md text-gray-10">
-                  Destination Address
+                  {t('destination_address')}
                   {!isSmartContractWallet ? ' (optional)' : ''}
                 </span>
                 <input
                   className="mt-1 w-full rounded border border-gray-6 px-2 py-1"
-                  placeholder="Enter destination address"
+                  placeholder={t('enter_destination_address')}
                   defaultValue={destinationAddress}
                   spellCheck={false}
                   onChange={e => {
@@ -899,8 +900,8 @@ export function TransferPanelMain({
         className="md:max-w-[628px]"
       >
         <p>
-          The Arbitrum bridge does not currently support {selectedToken?.symbol}
-          , please ask the {selectedToken?.symbol} team for more info.
+          {t('the_arbitrum')} {selectedToken?.symbol}
+          , {t('please_ask_the')} {selectedToken?.symbol} {t('team_for_more_info')}
         </p>
       </Dialog>
     </div>

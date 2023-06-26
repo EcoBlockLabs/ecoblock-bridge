@@ -28,6 +28,7 @@ import { getExplorerUrl } from '../../util/networks'
 import { useAppContextActions } from '../App/AppContext'
 import { trackEvent } from '../../util/AnalyticsUtils'
 import { shortenAddress } from '../../util/CommonUtils'
+import useTranslation from 'next-translate/useTranslation'
 
 type UDInfo = { name: string | null }
 const udInfoDefaults: UDInfo = { name: null }
@@ -76,6 +77,7 @@ export function HeaderAccountPopover({
 }) {
   const l1Provider = useProvider({ chainId: 1 })
   const { address } = useAccount()
+  const { t } = useTranslation('home')
   const { disconnect } = useDisconnect()
   const { chain } = useNetwork()
   const [, copyToClipboard] = useCopyToClipboard()
@@ -159,7 +161,7 @@ export function HeaderAccountPopover({
           <div className="flex flex-row justify-between">
             <Transition show={showCopied}>
               <span className="absolute left-[90px] top-[2rem] z-10 text-xs font-light text-white">
-                Copied to clipboard!
+                {t('copied_to_clipboard')}
               </span>
             </Transition>
             <button
@@ -204,7 +206,7 @@ export function HeaderAccountPopover({
                 onClick={openTransactionHistory}
               >
                 <DocumentTextIcon className="h-4 w-4 text-white" />
-                <span>Transactions</span>
+                <span>{t('transactions')}</span>
               </button>
             )}
 
@@ -215,7 +217,7 @@ export function HeaderAccountPopover({
                 className={headerItemsClassName}
               >
                 <ExternalLinkIcon className="h-4 w-4 text-white" />
-                <span>Explorer</span>
+                <span>{t('explorer')}</span>
               </ExternalLink>
             )}
 
@@ -226,7 +228,7 @@ export function HeaderAccountPopover({
                 onClick={openPreferences}
               >
                 <CogIcon className="h-4 w-4 text-white" />
-                <span>Preferences</span>
+                <span>{t('preferences')}</span>
                 {/*<span className="rounded-md bg-red-600 px-2 text-xs text-white lg:!ml-auto">*/}
                 {/*  NEW*/}
                 {/*</span>*/}
@@ -239,7 +241,7 @@ export function HeaderAccountPopover({
               onClick={() => disconnect()}
             >
               <LogoutIcon className="h-4 w-4 text-white" />
-              <span>Disconnect</span>
+              <span>{t('disconnect')}</span>
             </button>
           </div>
         </Popover.Panel>

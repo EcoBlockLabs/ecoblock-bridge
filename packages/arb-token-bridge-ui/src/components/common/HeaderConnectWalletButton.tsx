@@ -3,6 +3,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { HeaderAccountPopover } from './HeaderAccountPopover'
 import { HeaderNetworkInformation } from './HeaderNetworkInformation'
 import { NetworkSelectionContainer } from './NetworkSelectionContainer'
+import useTranslation from 'next-translate/useTranslation'
 
 function NetworkButtonAndConnectButton({
   connected,
@@ -15,6 +16,7 @@ function NetworkButtonAndConnectButton({
   openChainModal: () => void
   openConnectModal: () => void
 }) {
+  const { t } = useTranslation('common')
   if (!connected) {
     return (
       <button
@@ -23,7 +25,7 @@ function NetworkButtonAndConnectButton({
         className="arb-hover flex w-full flex-row items-center bg-lime-dark px-6 py-3 text-2xl font-medium text-white lg:rounded-full lg:bg-lime-dark lg:px-4 lg:py-2 lg:text-base lg:font-normal"
       >
         <PlusCircleIcon className="mr-3 h-10 w-10 rounded-full bg-white stroke-lime-dark p-1 opacity-40" />
-        Connect Wallet
+        {t('connect_wallet')}
       </button>
     )
   }
@@ -35,7 +37,7 @@ function NetworkButtonAndConnectButton({
         type="button"
         className="arb-hover flex w-full flex-row items-center bg-[#FF494A] bg-lime-dark px-6 py-3 text-2xl font-medium text-white lg:rounded-full lg:px-4 lg:py-2 lg:text-base lg:font-normal"
       >
-        Wrong network
+        {t('wrong_network')}
       </button>
     )
   }

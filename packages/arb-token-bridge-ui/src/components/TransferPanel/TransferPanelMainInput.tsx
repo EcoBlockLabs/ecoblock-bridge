@@ -1,3 +1,4 @@
+import useTranslation from 'next-translate/useTranslation'
 import { Loader } from '../common/atoms/Loader'
 import { TokenButton } from './TokenButton'
 
@@ -36,6 +37,7 @@ export type TransferPanelMainInputProps =
   }
 
 export function TransferPanelMainInput(props: TransferPanelMainInputProps) {
+  const { t } = useTranslation('home')
   const { errorMessage, maxButtonProps, ...rest } = props
   const { visible: maxButtonVisible, ...restMaxButtonProps } = maxButtonProps
 
@@ -49,13 +51,13 @@ export function TransferPanelMainInput(props: TransferPanelMainInputProps) {
       <div
         className={`flex h-12 flex-row items-center rounded-lg bg-white lg:h-16 ${borderClassName}`}
       >
-        <TokenButton />
+        {/* <TokenButton /> */}
         <div className="h-full border-r border-gray-4" />
         <div className="flex h-full flex-grow flex-row items-center justify-center px-3">
           <input
             type="text"
             inputMode="decimal"
-            placeholder="Enter amount"
+            placeholder={t('enter_amount')}
             className="h-full w-full bg-transparent text-xl font-light placeholder:text-gray-9 sm:text-3xl"
             {...rest}
           />

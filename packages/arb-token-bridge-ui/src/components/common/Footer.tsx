@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { ExternalLink } from './ExternalLink'
+import useTranslation from 'next-translate/useTranslation'
 
 type FooterLink = {
   title: string
@@ -9,33 +10,34 @@ type FooterLink = {
 
 const footerLinks: FooterLink[] = [
   {
-    title: 'Homepage',
+    title: 'home_page',
     href: 'https://ecoblock.tech',
     lgOrder: 1
   },
   {
-    title: 'Block Explorer',
+    title: 'block_explorer',
     href: 'https://ecoscan.io',
     lgOrder: 2
   },
   {
-    title: 'Documentation',
+    title: 'documentation',
     href: 'https://docs.ecoblock.tech',
     lgOrder: 3
   }
 ]
 
 export function Footer() {
+  const { t } = useTranslation('home')
   return (
     <footer className="z-[1] flex justify-center">
       <div className="flex w-full max-w-[1440px] flex-col space-y-8 py-20 text-white lg:px-8 lg:py-8">
         <div className="flex flex-col items-center space-y-2 px-8 text-center lg:items-start lg:px-0">
-          <span className="text-4xl">Optimistic Rollup Solution</span>
+          <span className="text-4xl">{t('optimistic')}</span>
           <ExternalLink
             href="https://docs.ecoblock.tech"
             className="text-2xl underline"
           >
-            Learn more.
+            {t('learn_more')}
           </ExternalLink>
         </div>
 
@@ -44,7 +46,7 @@ export function Footer() {
             {footerLinks.map(link => (
               <li key={link.href} className={`lg:order-${link.lgOrder}`}>
                 <ExternalLink href={link.href} className="arb-hover">
-                  {link.title}
+                  {t(link.title)}
                 </ExternalLink>
               </li>
             ))}
