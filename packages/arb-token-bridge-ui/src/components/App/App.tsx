@@ -242,7 +242,6 @@ function NetworkReady({ children }: { children: React.ReactNode }) {
 
 
 function ConnectionFallback(props: FallbackProps): JSX.Element {
-  const { t } = useTranslation('home')
   switch (props.status) {
     case UseNetworksAndSignersStatus.LOADING:
       return (
@@ -260,6 +259,8 @@ function ConnectionFallback(props: FallbackProps): JSX.Element {
       )
 
     case UseNetworksAndSignersStatus.NOT_CONNECTED:
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const { t } = useTranslation('home')
       return (
         <>
           <HeaderContent>
