@@ -85,6 +85,7 @@ export function HeaderMenuDesktop(
 export function HeaderMenuMobile(
   props: HeaderMenuProps & { children: React.ReactNode }
 ) {
+  const { t } = useTranslation('home')
   return (
     <Disclosure>
       {({ open }) => (
@@ -128,7 +129,7 @@ export function HeaderMenuMobile(
                     href={item.anchorProps?.href}
                     className="hover:underline focus:underline"
                   >
-                    {item.title}
+                    {t(item.title)}
                   </ExternalLink>
                 </li>
               ))}
