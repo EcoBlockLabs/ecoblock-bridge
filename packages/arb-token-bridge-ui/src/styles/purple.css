@@ -167,3 +167,8 @@
 .arbitrum-classic-theme .status-badge{
 	border: 1px solid gray !important;
 }
+
+.arbitrum-switch{
+	z-index: 99 !important;
+	min-width: 28px !important;
+}

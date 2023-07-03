@@ -202,6 +202,9 @@ export function Header() {
             {/*  Charts & Stats*/}
             {/*</HeaderMenuDesktop>*/}
           </div>
+          <div className="hidden max-lg:block">
+            <Languages />
+          </div>
         </div>
         <Disclosure>
           {({ open }) => (
